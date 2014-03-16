@@ -1,0 +1,114 @@
+\documentclass[a4paper]{article}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{verbatim}
+
+\begin{document}
+
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{22cm}
+
+\title{\Huge\textbf{Jogos de tabuleiro}\linebreak\linebreak\linebreak
+\Large\textbf{Relatório 1ª Fase}\linebreak\linebreak
+\includegraphics[height=6cm, width=7cm]{feup.pdf}\linebreak \linebreak
+\Large{Mestrado Integrado em Engenharia Informática e Computação} \linebreak \linebreak
+\Large{Base de dados}\linebreak
+}
+
+\author{\textbf{Grupo 601:}\\ Hugo Ari Rodrigues Drumond --- 201102900 \\  Ricardo Jorge Matos Figueiredo --- 201100687\\\linebreak\linebreak \\
+ \\ Faculdade de Engenharia da Universidade do Porto \\ Rua Roberto Frias, 4200--65 Porto, Portugal \linebreak\linebreak\linebreak
+\linebreak\linebreak\vspace{1cm}}
+\maketitle
+\thispagestyle{empty}
+
+\newpage
+
+\section*{Resumo}
+%Decidimos elaborar uma base de dados para uma Empresa organizadora de \textit{Jogos de tabuleiro}.    \cite{creator}
+
+
+%Descrever muito sumariamente (1-2 parágrafos) o trabalho que está a ser reportado
+
+%\section{Introdução}
+
+%Descrever os objectivos e motivação do trabalho.
+%Todas as figuras devem ser referidas no texto. %\ref{fig:codigoFigura}
+
+\section{Contexto}
+Esta base de dados destina-se a um Salão de jogos que organiza jogos de Tabuleiro.
+%Para quem se destina, quem e que vai usar, 
+
+%\clearpage
+\section{Conceitos Principais}
+
+%Identificar as classes e falar um pouco sobre elas. As óbvias não é necessário.
+%jogador, país,equipa,formato,localpartida,escalão,jogo,temporada,torneio,patrocinador,partida e arbitro
+%jogador:nome,email,dataNascimento,morada,telefone,pontos
+%país: nome,extensão
+%equipa: nome,
+%Formato:
+%Jogo: nome
+%localPartida: morada,andar,sala,telefone
+%escalão:nome
+%temporada: ano,nome
+%torneio: nome
+%patrocinador: nome
+%media: nome
+As classes contituintes desta base de dados são:
+
+\begin{itemize}
+
+\item A classe "\textbf{Jogador}" é referente a cada jogador que participa no jogo e têm como atributos um nome(string), um email(string), uma data de nascimento(string), uma morada(string), um número de telefone(string) e  os respectivos pontos(int).
+
+\item A classe "\textbf{País}", é referente a todos os países  está associado à nacionalidade quer do jogador quer do árbitro e tem como atributos um nome(string).
+
+\item A classe "\textbf{Equipa}", é referente a todas as equipas existentes no jogo e tem como atributo um nome(string).
+
+\item A classe "\textbf{Formato}".... Malta ver se esta classe é mesmo necessária
+
+\item A classe "\textbf{Jogo}" é referente ao tipo de jogo e tem  como único atributo um nome(string) que pode ser damas, xadrez...
+
+\item A classe "\textbf{LocalPartida}" é referente ao local onde são feitas as partidas de cada torneio, tem como atributos uma morada(string), um andar(string), uma sala(string), e um teleforne(string).
+
+\item A classe "\textbf{Escalão}", é referente ao escalão do torneio, e tem como atributo o nome(string) do respectivo escalão.
+
+\item A classe "\textbf{Temporada}" é referente à temporada em que é efectuado o torneio, tem como atributos o ano(string) da temporada e o nome(string)
+
+\item A classe "\textbf{Torneio}" é referente ao torneio é referente ao torneio do respoectivo jogo e escalão, tem como atrbutos o nome(string).
+
+\item A classe "\textbf{Patrocinador}" é referene aos possiveis patrocinadores da liga, do jogo, das equipa e patrocinadores e tem como atributos o nome(string) da repsectiva associação/empresa patrocinadora.
+\end{itemize}
+
+De forma sussinta a base de dado do jogo é suportada da seguinte forma, existe um jogo que 
+
+%Prof favor completem com um texto melhor que explique os relacionamentos das classes mais dificeis 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Diagrama de classes UML}
+%Incluir todas as estrições, digitalizar o diagrama ou fazer num programa qualquer. Incluir notas.
+
+
+\clearpage
+\addcontentsline{toc}{section}{Bibliografia}
+\renewcommand\refname{Bibliografia}
+\bibliographystyle{plain}
+\bibliography{myRefs}
+
+\end{document}
