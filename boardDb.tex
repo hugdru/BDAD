@@ -81,12 +81,12 @@ As classes constituintes desta base de dados são:
 
 \item A classe "\textbf{Torneio}" poderá conter diversos escalões, mas só para um jogo, e tem como atributos o nome(string).
 
-\item A classe "\textbf{Patrocinador}" refere-se aos possíveis patrocinadores da liga e à relação torneio, equipa e patrocinador e tem como atributos o nome(string) da respetiva associação/empresa patrocinadora. Decidimos criar uma relação ternária entre torneio, equipa e patrocinador porque para uma equipa poderá ter patrocinadores diferentes consoante um dado torneio.
+\item A classe "\textbf{Patrocinador}" refere-se aos possíveis patrocinadores da liga e à relação torneio, equipa e patrocinador e tem como atributos o nome(string) da respetiva associação/empresa patrocinadora. Decidimos criar uma relação ternária entre torneio, equipa e patrocinador porque uma equipa poderá ter patrocinadores diferentes consoante um dado torneio.
 
 \item A classe "\textbf{Arbitro}" é referente ao arbitro, e possui os campos: nome e a data de nascimento.
 \end{itemize}
 
-Todos os atributos têm de ser preenchidos (not NULL), excluindo: Jogador::email e localPartida::\{andar,sala\}.
+Todos os atributos têm de ser preenchidos (not NULL), excluindo: Jogador::email e localPartida::\{sala\}.
 
 %Prof favor completem com um texto melhor que explique os relacionamentos das classes mais dificeis 
 
