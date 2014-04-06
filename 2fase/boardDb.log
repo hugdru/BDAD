@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Arch Linux) (format=pdflatex 2014.3.13)  2 APR 2014 14:02
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Arch Linux) (format=pdflatex 2014.3.13)  6 APR 2014 01:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -294,21 +294,28 @@ Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 \verbatim@line=\toks18
 \verbatim@in@stream=\read1
 )
-No file boardDb.aux.
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/share/texmf-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+)) (./boardDb.aux)
 \openout1 = `boardDb.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+
 (/usr/share/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count89
@@ -371,51 +378,67 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 24.
+(Font)              <14.4> on input line 25.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 24.
+(Font)              <7> on input line 25.
 
 <feup.pdf, id=1, 614.295pt x 794.97pt>
 File: feup.pdf Graphic file (type pdf)
  <use feup.pdf>
-Package pdftex.def Info: feup.pdf used on input line 24.
+Package pdftex.def Info: feup.pdf used on input line 25.
 (pdftex.def)             Requested size: 199.16547pt x 170.709pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 24.
+(Font)              <12> on input line 25.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 24.
+(Font)              <8> on input line 25.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 24.
+(Font)              <6> on input line 25.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./feup.pdf>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 40.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 52.
 
-(/usr/share/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 40.
- [2] [3]
-No file boardDb.bbl.
-(./boardDb.aux) ) 
+Underfull \hbox (badness 10000) in paragraph at lines 49--66
+
+ []
+
+
+Overfull \hbox (4.91455pt too wide) in paragraph at lines 49--66
+\T1/cmr/m/n/10 LocalEncontro( $[]$, idCidade->Cidade, idExtensao->Extensao, co-
+
+ []
+
+
+Overfull \hbox (4.49799pt too wide) in paragraph at lines 49--66
+\T1/cmr/m/n/10 EquipaPatrocinadorTorneio( $[]$, $[]$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--66
+
+ []
+
+[2] [3] (./boardDb.aux) ) 
 Here is how much of TeX's memory you used:
- 2180 strings out of 493308
- 29042 string characters out of 6143616
- 96050 words of memory out of 5000000
- 5613 multiletter control sequences out of 15000+600000
- 9116 words of font info for 32 fonts, out of 8000000 for 9000
+ 2362 strings out of 493308
+ 30165 string characters out of 6143616
+ 95131 words of memory out of 5000000
+ 5786 multiletter control sequences out of 15000+600000
+ 14225 words of font info for 35 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,7n,23p,931b,245s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.p
-fb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb>
-Output written on boardDb.pdf (3 pages, 135977 bytes).
+ 37i,7n,23p,852b,245s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-sup
+er-t1.enc}</usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr
+/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-di
+st/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/
+public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super
+/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><
+/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb>
+Output written on boardDb.pdf (3 pages, 165087 bytes).
 PDF statistics:
- 44 PDF objects out of 1000 (max. 8388607)
- 25 compressed objects within 1 object stream
+ 53 PDF objects out of 1000 (max. 8388607)
+ 32 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
