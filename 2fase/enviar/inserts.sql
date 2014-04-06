@@ -68,39 +68,3 @@ INSERT INTO LocalEncontro values(2, 2, 2, '5700', 'Rua Alberto', '224446677');
 INSERT INTO LocalEncontro values(3, 3, 3, '5700', 'Rua da Campainha', '224446677');
 INSERT INTO LocalEncontro values(4, 4, 3, '5700', 'Rua Afonsina', '224446677');
 INSERT INTO LocalEncontro values(5, 5, 4, '5700', 'Rua da Travessa', '224446677');
-
-INSERT INTO ArbitroTipoJogo values ('1','Xadrez');
-INSERT INTO ArbitroTipoJogo values ('2','Damas');
-INSERT INTO ArbitroTipoJogo values ('3','Micado');
-INSERT INTO ArbitroTipoJogo values ('4','The4Maze');
-INSERT INTO ArbitroTipoJogo values ('5','Sueca');
-
-INSERT INTO Partida values (null, 'Minis', '11/3/2014', '120');
-INSERT INTO Partida values (null, 'Iniciados', '12/3/2014', '120');
-INSERT INTO Partida values (null, 'Cadetes', '13/3/2014', '120');
-INSERT INTO Partida values (null, 'Juniors', '14/3/2014', '120');
-INSERT INTO Partida values (null, 'Seniors', '15/3/2014', '120');
-
-INSERT INTO ArbitroPartida values ('1', '1');
-INSERT INTO ArbitroPartida values ('2', '2');
-INSERT INTO ArbitroPartida values ('3', '3');
-INSERT INTO ArbitroPartida values ('4', '4');
-INSERT INTO ArbitroPartida values ('5', '5');
-
-INSERT INTO EquipaPartida values ('BLACKWHITE','1','1','4');
-INSERT INTO EquipaPartida values ('HORSEPOWER','1','1','4');
-INSERT INTO EquipaPartida values ('BOARDERS','1','1','4');
-INSERT INTO EquipaPartida values ('CHESSERS','1','1','4');
-INSERT INTO EquipaPartida values ('MATES','1','1','4');
-
-INSERT INTO EquipaPatrocinadorTorneio values ('BLACKWHITE', 'Nike', '1');
-INSERT INTO EquipaPatrocinadorTorneio values ('HORSEPOWER', 'PastaCouto', '2');
-INSERT INTO EquipaPatrocinadorTorneio values ('BOARDERS', 'Sonai', '3');
-INSERT INTO EquipaPatrocinadorTorneio values ('CHESSERS', 'Nestle', '4');
-INSERT INTO EquipaPatrocinadorTorneio values ('MATES', 'F.C.Porto', '5');
-
-INSERT INTO Torneio values (null, 'Torneio1', '2013/2014', 'equipas', 'Xadrez');
-INSERT INTO Torneio values (null, 'Torneio2', '2013/2014', 'individual', 'Damas');
-INSERT INTO Torneio values (null, 'Torneio3', '2013/2014', 'equipas', 'Micado');
-INSERT INTO Torneio values (null, 'Torneio4', '2013/2014', 'individual', 'The4Mazes');
-INSERT INTO Torneio values (null, 'Torneio5', '2013/2014', 'equipas', 'Sueca');

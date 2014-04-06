@@ -125,10 +125,15 @@ CREATE TABLE IF NOT EXISTS ArbitroTipoJogo (
 
 CREATE TABLE IF NOT EXISTS Partida (
   idPartida INTEGER AUTO_INCREMENT,
+  idLocalEncontro INTEGER,
   idTorneio INTEGER,
   idEscalao varchar2(30),
   dataInicio date NOT NULL,
   duracao INTEGER,
+  FOREIGN KEY(idLocalEncontro)
+    REFERENCES LocalEncontro(idLocalEncontro)
+      ON DELETE SET NULL
+      ON UPDATE CASCADE,
   FOREIGN KEY(idEscalao)
     REFERENCES Escalao(nome)
       ON DELETE SET NULL

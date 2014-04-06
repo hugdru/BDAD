@@ -55,7 +55,7 @@ A transição do diagrama de classes para o schema da base de dados foi feita se
 \textbf{LocalEncontro}(\underline{idLocalEncontro}, idCidade->Cidade, idExtensao->Extensao, codigoPostal, rua, telefone) \\
 \textbf{Cidade}(\underline{idCidade}, nome, idPais->Pais) \textbf{TipoJogo}(\underline{nome}) \\
 \textbf{ArbitroTipoJogo}(\underline{idArbitro->Arbitro}, \underline{idTipoJogo->TipoJogo}) \\
-\textbf{Partida}(\underline{idPartida}, idTorneio, dataInicio, duracao, idEscalao->Escalao) \\
+\textbf{Partida}(\underline{idPartida}, idTorneio->Torneio, idLocalEncontro->LocalEncontro, dataInicio, duracao, idEscalao->Escalao) \\
 \textbf{ArbitroPartida}(\underline{idArbitro->Arbitro}, \underline{idPartida->Partida}) \\
 \textbf{EquipaPartida}(\underline{idEquipa->Equipa}, \underline{idPartida->Partida}, posicao, resultado) \\
 \textbf{Patrocinador}(\underline{nome}) \textbf{Escalao}(\underline{nome}) \\
@@ -75,7 +75,7 @@ E obviamente que foram definidas chaves que são um tipo de restrição. \\
 
 %Dizer o que irá ser inserido na bases de dados
 \section{Linguagem de Manipulação de dados}
-Em cada tabela foram inseridas cinco linhas.
+Houve tabelas onde foram inseridas cinco linhas.
 
 %Incluir todas as restrições, digitalizar o diagrama ou fazer num programa qualquer. Incluir notas.
 \section{Diagrama de classes UML melhorado}
