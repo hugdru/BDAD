@@ -1,7 +1,7 @@
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS Jogador (
-  idJogador INTEGER AUTOINCREMENT,
+  idJogador INTEGER AUTO_INCREMENT,
   nome varchar2(70) NOT NULL,
   codigoPostal varchar2(10),
   dataNascimento date NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS JogadorEquipa (
   PRIMARY KEY(idEquipa,idJogador));
 
 CREATE TABLE IF NOT EXISTS Arbitro (
-  idArbitro INTEGER AUTOINCREMENT,
+  idArbitro INTEGER AUTO_INCREMENT,
   nome varchar2(70) NOT NULL,
   codigoPostal varchar2(10) NOT NULL,
   dataNascimento date NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS Arbitro (
   PRIMARY KEY(idArbitro));
 
 CREATE TABLE IF NOT EXISTS LocalEncontro (
-  idLocalEncontro INTEGER AUTOINCREMENT,
+  idLocalEncontro INTEGER AUTO_INCREMENT,
   idCidade INTEGER NOT NULL,
   idExtensao INTEGER NOT NULL,
   codigoPostal varchar2(10) NOT NULL,
@@ -58,11 +58,11 @@ CREATE TABLE IF NOT EXISTS LocalEncontro (
   PRIMARY KEY(idLocalEncontro));
 
 CREATE TABLE IF NOT EXISTS Cidade (
-  idCidade INTEGER AUTOINCREMENT,
+  idCidade INTEGER AUTO_INCREMENT,
   nome varchar2(50) NOT NULL,
   idPais INTEGER NOT NULL,
   FOREIGN KEY(idPais) REFERENCES Pais(idPais),
-  PRIMARY KEY(idCidade) REFERENCES Cidade(idCidade));
+  PRIMARY KEY(idCidade));
 
 CREATE TABLE IF NOT EXISTS TipoJogo (
   nome varchar2(30),
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS ArbitroTipoJogo (
   PRIMARY KEY(idArbitro,idTipoJogo));
 
 CREATE TABLE IF NOT EXISTS Partida (
-  idPartida INTEGER AUTOINCREMENT,
+  idPartida INTEGER AUTO_INCREMENT,
   idEscalao varchar2(30),
   dataInicio date NOT NULL,
   duracao INTEGER,
@@ -95,12 +95,13 @@ CREATE TABLE IF NOT EXISTS Escalao (
   PRIMARY KEY(nome));
 
 CREATE TABLE IF NOT EXISTS EquipaPartida (
-  idEquipa varchar(60),
+  idEquipa varchar2(60),
   idPartida INTEGER,
   posicao INTEGER NOT NULL,
   resultado INTEGER,
-  FOREIGN KEY(idEquipa) Equipa(nome),
-  FOREIGN KEY(idPartida) Partida(idPartida),
+  CHECK ( posicao > 0 ),
+  FOREIGN KEY(idEquipa) REFERENCES Equipa(nome),
+  FOREIGN KEY(idPartida) REFERENCES Partida(idPartida),
   PRIMARY KEY(idEquipa,idPartida));
 
 CREATE TABLE IF NOT EXISTS Patrocinador (
@@ -117,9 +118,9 @@ CREATE TABLE IF NOT EXISTS EquipaPatrocinadorTorneio (
   PRIMARY KEY(idEquipa,idPatrocinador,idTorneio));
 
 CREATE TABLE IF NOT EXISTS Torneio (
-  idTorneio INTEGER AUTOINCREMENT,
+  idTorneio INTEGER AUTO_INCREMENT,
   nome varchar2(30),
-  temporada year-monthInterval,
+  temporada TEXT,
   formato varchar2(20),
   idTipoJogo varchar2(30),
   FOREIGN KEY(IdTipoJogo) REFERENCES TipoJogo(nome)
