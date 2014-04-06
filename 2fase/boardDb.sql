@@ -1,3 +1,5 @@
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE IF NOT EXISTS Jogador (
   idJogador INTEGER AUTOINCREMENT,
   nome varchar2(70) NOT NULL,

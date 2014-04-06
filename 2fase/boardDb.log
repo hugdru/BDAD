@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Arch Linux) (format=pdflatex 2014.3.13)  6 APR 2014 18:44
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Arch Linux) (format=pdflatex 2014.3.13)  6 APR 2014 21:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -418,39 +418,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--66
 
  []
 
-[2] <./BDAD_DIAGRAMA_CORRIGIDO.jpeg, id=26, 603.4545pt x 937.70325pt>
-File: ./BDAD_DIAGRAMA_CORRIGIDO.jpeg Graphic file (type jpg)
+[2] <./classModel.pdf, id=26, 596.2275pt x 844.15375pt>
+File: ./classModel.pdf Graphic file (type pdf)
+ <use ./classModel.pdf>
+Package pdftex.def Info: ./classModel.pdf used on input line 80.
+(pdftex.def)             Requested size: 357.73926pt x 506.49615pt.
 
-<use ./BDAD_DIAGRAMA_CORRIGIDO.jpeg>
-Package pdftex.def Info: ./BDAD_DIAGRAMA_CORRIGIDO.jpeg used on input line 80.
-(pdftex.def)             Requested size: 362.07549pt x 562.6263pt.
-
-Overfull \hbox (32.07549pt too wide) in paragraph at lines 80--81
+Overfull \hbox (27.73926pt too wide) in paragraph at lines 80--81
 [][] 
  []
 
-[3] [4 <./BDAD_DIAGRAMA_CORRIGIDO.jpeg>] (./boardDb.aux) ) 
+[3] [4 <./classModel.pdf>] (./boardDb.aux) ) 
 Here is how much of TeX's memory you used:
- 2377 strings out of 493308
- 30452 string characters out of 6143616
+ 2376 strings out of 493308
+ 30378 string characters out of 6143616
  101131 words of memory out of 5000000
  5798 multiletter control sequences out of 15000+600000
  14993 words of font info for 36 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  37i,7n,23p,1985b,245s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dis
-t/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf-dist/fonts/type1/p
-ublic/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/
-sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></
-usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf
--dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf-dist/fonts/typ
-e1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-su
-per/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pf
-b>
-Output written on boardDb.pdf (4 pages, 313780 bytes).
+{/usr/share/texmf-dist/fonts/enc/dv
+ips/cm-super/cm-super-t1.enc}</usr/share/texmf-dist/fonts/type1/public/cm-super
+/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb><
+/usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texm
+f-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/cm-super/sfrm0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
+uper/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.p
+fb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb>
+Output written on boardDb.pdf (4 pages, 409656 bytes).
 PDF statistics:
- 61 PDF objects out of 1000 (max. 8388607)
- 37 compressed objects within 1 object stream
+ 69 PDF objects out of 1000 (max. 8388607)
+ 45 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
