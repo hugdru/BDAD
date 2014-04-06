@@ -12,12 +12,21 @@ INSERT INTO TipoJogo values('Micado');
 INSERT INTO TipoJogo values('The4Maze');
 INSERT INTO TipoJogo values('Sueca');
 
+INSERT INTO Pais values('Gana');
+INSERT INTO Pais values('Senegal');
+INSERT INTO Pais values('Irao');
+INSERT INTO Pais values('Jamaica');
+INSERT INTO Pais values('Grecia');
+INSERT INTO Pais values('Portugal');
+INSERT INTO Pais values('Eslovenia');
+INSERT INTO Pais values('Espanha');
+INSERT INTO Pais values('Brasil');
 
-INSERT INTO Cidade values(null,'Acra','Gana';);
-INSERT INTO Cidade values(null,'Dakar','Senegal';);
-INSERT INTO Cidade values(null,'Teerao','Irao';);
-INSERT INTO Cidade values(null,'Kingston','Jamaica';);
-INSERT INTO Cidade values(null,'Atenas','Grecia';);
+INSERT INTO Cidade values(null,'Acra','Gana');
+INSERT INTO Cidade values(null,'Dakar','Senegal');
+INSERT INTO Cidade values(null,'Teerao','Irao');
+INSERT INTO Cidade values(null,'Kingston','Jamaica');
+INSERT INTO Cidade values(null,'Atenas','Grecia');
 
 INSERT INTO Escalao values('Minis');
 INSERT INTO Escalao values('Iniciados');
@@ -31,11 +40,16 @@ INSERT INTO Patrocinador values('Sonai');
 INSERT INTO Patrocinador values('Nestle');
 INSERT INTO Patrocinador values('F.C.Porto');
 
-INSERT INTO Jogador values (null,'Ricardo','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Portugal', '1', '100', 'ricardo@gmail.com');
-INSERT INTO Jogador values (null,'Manuel','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Eslovenia', '2', '200', 'manuel@gmail.com');
-INSERT INTO Jogador values (null,'Joao','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Espanha', '3', '300', 'joao@gmail.com');
-INSERT INTO Jogador values (null,'Maria','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Portugal', '4', '100', 'maria@gmail.com');
-INSERT INTO Jogador values (null,'Joana','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Brasil', '5', '400', 'joana@gmail.com');
+INSERT INTO Extensao values (null,'100');
+INSERT INTO Extensao values (null,'200');
+INSERT INTO Extensao values (null,'300');
+INSERT INTO Extensao values (null,'400');
+
+INSERT INTO Jogador values (null,'Ricardo','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Portugal', '1', '1', 'ricardo@gmail.com');
+INSERT INTO Jogador values (null,'Manuel','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Eslovenia', '2', '2', 'manuel@gmail.com');
+INSERT INTO Jogador values (null,'Joao','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Espanha', '3', '3', 'joao@gmail.com');
+INSERT INTO Jogador values (null,'Maria','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Portugal', '4', '2', 'maria@gmail.com');
+INSERT INTO Jogador values (null,'Joana','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Brasil', '5', '1', 'joana@gmail.com');
 
 INSERT INTO JogadorEquipa values ('BLACKWHITE', '0');
 INSERT INTO JogadorEquipa values ('HORSEPOWER', '1');
@@ -43,11 +57,11 @@ INSERT INTO JogadorEquipa values ('BOARDERS', '2');
 INSERT INTO JogadorEquipa values ('CHESSERS', '3');
 INSERT INTO JogadorEquipa values ('MATES', '4');
 
-INSERT INTO Jogador values (null,'Ricardo','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Portugal', '1', '100', ' ');
-INSERT INTO Jogador values (null,'Manuel','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Eslovenia', '2', '200', ' ');
-INSERT INTO Jogador values (null,'Joao','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Espanha', '3', '300', ' ');
-INSERT INTO Jogador values (null,'Maria','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Portugal', '4', '100', ' ');
-INSERT INTO Jogador values (null,'Joana','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Brasil', '5', '400', ' ');
+INSERT INTO Arbitro values (null,'Ricardo','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Portugal', '1', '1', ' ');
+INSERT INTO Arbitro values (null,'Manuel','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Eslovenia', '2', '2', ' ');
+INSERT INTO Arbitro values (null,'Joao','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Espanha', '3', '3', ' ');
+INSERT INTO Arbitro values (null,'Maria','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Portugal', '4', '1', ' ');
+INSERT INTO Arbitro values (null,'Joana','4300','9/10/1993','4','Rua Quinta de Campainha', '916010223', 'Brasil', '5', '4', ' ');
 
 INSERT INTO LocalEncontro values(null, '0', '100', '5700', 'Rua Herculano', '224446677');
 INSERT INTO LocalEncontro values(null, '1', '200', '5700', 'Rua Alberto', '224446677');
@@ -90,12 +104,3 @@ INSERT INTO Torneio values (null, 'Torneio2', '2013/2014', 'individual', 'Damas'
 INSERT INTO Torneio values (null, 'Torneio3', '2013/2014', 'equipas', 'Micado');
 INSERT INTO Torneio values (null, 'Torneio4', '2013/2014', 'individual', 'The4Mazes');
 INSERT INTO Torneio values (null, 'Torneio5', '2013/2014', 'equipas', 'Sueca');
-
-
-
-
-
-
-
-
-
