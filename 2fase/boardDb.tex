@@ -55,28 +55,29 @@ A transição do diagrama de classes para o schema da base de dados foi feita se
 \textbf{LocalEncontro}(\underline{idLocalEncontro}, idCidade->Cidade, idExtensao->Extensao, codigoPostal, rua, telefone) \\
 \textbf{Cidade}(\underline{idCidade}, nome, idPais->Pais) \textbf{TipoJogo}(\underline{nome}) \\
 \textbf{ArbitroTipoJogo}(\underline{idArbitro->Arbitro}, \underline{idTipoJogo->TipoJogo}) \\
-\textbf{Partida}(\underline{idPartida}, dataInicio, duracao, idEscalao->Escalao) \\
+\textbf{Partida}(\underline{idPartida}, idTorneio, dataInicio, duracao, idEscalao->Escalao) \\
 \textbf{ArbitroPartida}(\underline{idArbitro->Arbitro}, \underline{idPartida->Partida}) \\
 \textbf{EquipaPartida}(\underline{idEquipa->Equipa}, \underline{idPartida->Partida}, posicao, resultado) \\
 \textbf{Patrocinador}(\underline{nome}) \textbf{Escalao}(\underline{nome}) \\
 \textbf{EquipaPatrocinadorTorneio}(\underline{idEquipa->Equipa}, \underline{idPatrocinador->Patrocinador}, \underline{idTorneio->Torneio}) \\
 \textbf{Torneio}(\underline{idTorneio}, idTipoJogo->TipoJogo, nome, temporada, formato) \\
+\textbf{Extensao}(\underline{idExtensao}, codigo) \textbf{Pais}(\underline{nome}) \\
 \\\newline
 A nossa base de dados de início encontra-se na 3ª Forma Normal, visto que respeita a 1ª, 2ª, 3ª formas normais. Deste modo a nossa base de dados evita algumas anomalias: redundância de dados, atualização de campos, campos sinónimos, entre outros. Não continuámos a normalizar para além da 3ª Forma Normal porque isto tornaria a nossa base de dados mais lenta devido à quantidade de ligações, mais difícil de pesquisar e por não ser exigido pelos docentes. Todas as nossas relações estão na 1ª Forma Normal porque são respeitadas as regras das tabelas e porque em cada relação está definida uma chave primária. Também está na 2ª visto que nenhum subconjunto das chaves primárias determina um atributo não chave, as nossas relações só têm uma chave ou são todas chaves portanto respeitam de imediato esta Forma Normal. Excepto a classe de associação que é necessário identificar se um subconjunto da chave identifica um atributo não chave, que não se verifica, portanto está na segunda Forma Normal. Para respeitar a 3ª Forma Normal não podem haver dependências funcionais transitivas, A->B \&\& B->C, que não acontece na nossa bases de dados. A única razão para a nossa base de dados não respeitar a BCNF restringe-se às relações Árbitro e Jogador, porque existe um determinante em cada uma das relações que não é chave candidata, a dependência funcional idCidade->Cidade,rua -> codigoPostal. Cada Cidade tem um nome, um apontador para um País e um código único que serve de chave. Uma maneira de corrigir isto seria criar uma nova tabela chamada CidadeRua em que iria existir uma chave estrangeira, idCidade->Cidade, e um membro chamado rua. Estes dois campos funcionariam como chaves primárias nesta tabela e identificariam o codigoPostal. Nas outras duas tabelas haveria uma chave estrangeira chamada idCidadeRua->CidadeRua e seriam removidos os campos codigoPostal, idCidade->Cidade e rua.
 
 %indicar o tipo de restrições que foram usadas e a criação das tabelas
 \section{Linguagem de Definição de dados e Restrições}
-Na nossa base de dados existem algumas restrições e gatilhos.
+Na nossa base de dados existem algumas restrições. \\
 \textbf{Restrições de valor:} NOT NULL e de limites de atributos. \\
 \textbf{Restrições entre atributos:} não foi utilizado porque não temos membros em que faça sentido utilizar este tipo de restrição. \\
-\textbf{Asserção:} arranjar uma maneira de colocar isto \\
-E obviamente que foram definidas chaves primárias e estrangeiras que são um tipo de restrição. \\
+\textbf{Restrições de chave externa:} Em vez de ser rejeitada a modificação de uma tabela que é referenciada noutra decidimos que caso houvesse um delete o "apontador" devia ser NULO e numa atualização todos os valores antigos deviam ser alterados em cascata, ON DELETE SET NULL \&\& ON UPDATE CASCADE .
+E obviamente que foram definidas chaves que são um tipo de restrição. \\
 
 %Dizer o que irá ser inserido na bases de dados
 \section{Linguagem de Manipulação de dados}
-Foi inserido em cada tabela 5 linhas.
+Em cada tabela foram inseridas cinco linhas.
 
 %Incluir todas as restrições, digitalizar o diagrama ou fazer num programa qualquer. Incluir notas.
 \section{Diagrama de classes UML melhorado}
-\includegraphics[scale=0.6]{./classModel.pdf}
+\includegraphics[scale=0.80]{./classModel.pdf}
 \end{document}
