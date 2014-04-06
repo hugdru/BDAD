@@ -48,17 +48,17 @@ Num torneio de jogos de tabuleiro podem haver várias partidas entre duas ou mai
 \section{Passagem ao modelo relacional e normalização}
 A transição do diagrama de classes para o schema da base de dados foi feita sem grandes problemas. Optámos por separar a generalização em duas tabelas segundo o estilo orientado a objetos, porque ao fazer isto ficamos no ponto de equilibro entre poupar nas ligações de tabelas e nos recursos de armazenamento. Uma relação, menos ligações embora haja desperdício de armazenamento; Três relações, mais ligações e mesmo uso de recursos de armazenamento. A única ternária no nosso uml foi decomposta em EquipaPatrocinadorTorneio e a classe de associação em EquipaPartida. Mais as tabelas de "apoio". Na tabela Jogador o idPais->País tem o significado de Nacionalidade e idCidade->Cidade é um apontador para uma cidade que por sua vez está associada a um País. O telefone e a extensão podem não estar ligados nem ao País nem à morada de uma Pessoa, por isso não servem de determinante para nenhum desses atributos.
 \\\newline
-\textbf{Jogador}(\underline{idJogador}, codigoPostal, dataNascimento, numeroAndar, rua, telefone, idPais->Pais, idCidade->Cidade, idExtensao->Extensao, email) \\
+\textbf{Jogador}(\underline{idJogador}, nome, codigoPostal, dataNascimento, numeroAndar, rua, telefone, idPais->Pais, idCidade->Cidade, idExtensao->Extensao, email) \\
 \textbf{Equipa}(\underline{nome}, abreviatura) \\ %dúvida aqui sobre bcnf
 \textbf{JogadorEquipa}(\underline{idEquipa->Equipa}, \underline{idJogador->Jogador}) \\
-\textbf{Árbitro}(\underline{idÁrbitro}, codigoPostal, dataNascimento, numeroAndar, rua, telefone, idPais->Pais, idCidade->Cidade, idExtensao->Extensao, observacoes) \\
+\textbf{Árbitro}(\underline{idÁrbitro}, nome, codigoPostal, dataNascimento, numeroAndar, rua, telefone, idPais->Pais, idCidade->Cidade, idExtensao->Extensao, observacoes) \\
 \textbf{LocalEncontro}(\underline{idLocalEncontro}, idCidade->Cidade, idExtensao->Extensao, codigoPostal, rua, telefone) \\
-\textbf{Cidade}(\underline{idCidade}, nome, idPais->Pais) \textbf{TipoJogo}(\underline{idTipoJogo}, nome) \\
+\textbf{Cidade}(\underline{idCidade}, nome, idPais->Pais) \textbf{TipoJogo}(\underline{nome}) \\
 \textbf{ArbitroTipoJogo}(\underline{idArbitro->Arbitro}, \underline{idTipoJogo->TipoJogo}) \\
 \textbf{Partida}(\underline{idPartida}, dataInicio, duracao, idEscalao->Escalao) \\
 \textbf{ArbitroPartida}(\underline{idArbitro->Arbitro}, \underline{idPartida->Partida}) \\
 \textbf{EquipaPartida}(\underline{idEquipa->Equipa}, \underline{idPartida->Partida}, posicao, resultado) \\
-\textbf{Patrocinador}(\underline{idPatrocinador}, nome) \textbf{Escalao}(\underline{idEscalao}, nome) \\
+\textbf{Patrocinador}(\underline{nome}) \textbf{Escalao}(\underline{nome}) \\
 \textbf{EquipaPatrocinadorTorneio}(\underline{idEquipa->Equipa}, \underline{idPatrocinador->Patrocinador}, \underline{idTorneio->Torneio}) \\
 \textbf{Torneio}(\underline{idTorneio}, idTipoJogo->TipoJogo, nome, temporada, formato) \\
 \\\newline
