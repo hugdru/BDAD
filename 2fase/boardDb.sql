@@ -8,11 +8,11 @@ CREATE TABLE IF NOT EXISTS Jogador (
   numeroAndar varchar2(20),
   rua varchar2(60),
   telefone char(9) NOT NULL,
-  idPais INTEGER NOT NULL,
+  idPais varchar2(50) NOT NULL,
   idCidade INTEGER,
   idExtensao INTEGER NOT NULL,
   email varchar2(254) NOT NULL,
-  FOREIGN KEY(idPais) REFERENCES Pais(idPais),
+  FOREIGN KEY(idPais) REFERENCES Pais(nome),
   FOREIGN KEY(idCidade) REFERENCES Cidade(idCidade),
   FOREIGN KEY(idExtensao) REFERENCES Extensao(idExtensao),
   PRIMARY KEY(idJogador));
@@ -37,11 +37,11 @@ CREATE TABLE IF NOT EXISTS Arbitro (
   numeroAndar varchar2(20) NOT NULL,
   rua varchar2(60) NOT NULL,
   telefone char(9) NOT NULL,
-  idPais INTEGER NOT NULL,
+  idPais varchar2(50) NOT NULL,
   idCidade INTEGER NOT NULL,
   idExtensao INTEGER NOT NULL,
   observacoes varchar2(100),
-  FOREIGN KEY(idPais) REFERENCES Pais(idPais),
+  FOREIGN KEY(idPais) REFERENCES Pais(nome),
   FOREIGN KEY(idCidade) REFERENCES Cidade(idCidade),
   FOREIGN KEY(idExtensao) REFERENCES Extensao(idExtensao),
   PRIMARY KEY(idArbitro));
@@ -57,11 +57,15 @@ CREATE TABLE IF NOT EXISTS LocalEncontro (
   FOREIGN KEY(idExtensao) REFERENCES Extensao(idExtensao),
   PRIMARY KEY(idLocalEncontro));
 
+CREATE TABLE IF NOT EXISTS Pais (
+  nome varchar2(50),
+  PRIMARY KEY(nome));
+
 CREATE TABLE IF NOT EXISTS Cidade (
   idCidade INTEGER AUTO_INCREMENT,
   nome varchar2(50) NOT NULL,
-  idPais INTEGER NOT NULL,
-  FOREIGN KEY(idPais) REFERENCES Pais(idPais),
+  idPais varchar2(50) NOT NULL,
+  FOREIGN KEY(idPais) REFERENCES Pais(nome),
   PRIMARY KEY(idCidade));
 
 CREATE TABLE IF NOT EXISTS TipoJogo (
