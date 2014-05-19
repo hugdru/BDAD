@@ -72,13 +72,14 @@ Na nossa base de dados existem algumas restrições. \\
 \textbf{Restrições entre atributos:} não foi utilizado porque não temos membros em que faça sentido utilizar este tipo de restrição. \\
 \textbf{Restrições de chave externa:} Em vez de ser rejeitada a modificação de uma tabela que é referenciada noutra decidimos que caso houvesse um delete o "apontador" devia ser NULO e numa atualização todos os valores antigos deviam ser alterados em cascata, ON DELETE SET NULL \&\& ON UPDATE CASCADE .
 E obviamente que foram definidas chaves que são um tipo de restrição. \\
-\textbf{Triggers:} COMPLETAR ESTA PARTE, POR FAZER 3 fase
+\textbf{Triggers:} COMPLETAR ESTA PARTE, POR FAZER 3 fase. Usar um gatilho para
 %Dizer o que irá ser inserido na bases de dados
 \section{Linguagem de Manipulação de dados - Inserção}
-Houve tabelas onde foram inseridas cinco linhas.
+Todas as tabelas foram preenchidas com pelo menos 4 linhas, média perto das 5 linhas/tabela. O ficheiro com os inserts chama-se inserts.sql.
 
 %Dizer que tipo de consultas fazemos na nossa base de dados
 \section{Linguagem de Manipulação de dados - Consulta}
+O fichero com as consultas chama-se queries.sql.
 POR FAZER 3 fase
 
 
