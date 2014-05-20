@@ -87,10 +87,10 @@ INSERT INTO JogadorEquipa values (7, 5);
 INSERT INTO JogadorEquipa values (5, 5);
 INSERT INTO JogadorEquipa values (8, 4);
 INSERT INTO JogadorEquipa values (7, 4);
+INSERT INTO JogadorEquipa values (5, 4);
 INSERT INTO JogadorEquipa values (4, 3);
+INSERT INTO JogadorEquipa values (5, 3);
 INSERT INTO JogadorEquipa values (3, 2);
-INSERT INTO JogadorEquipa values (5, 4);
-INSERT INTO JogadorEquipa values (5, 4);
 INSERT INTO JogadorEquipa values (2, 1);
 INSERT INTO JogadorEquipa values (1, 1);
 

@@ -79,8 +79,8 @@ CREATE TABLE IF NOT EXISTS Equipa (
   PRIMARY KEY(idEquipa));
 
 CREATE TABLE IF NOT EXISTS JogadorEquipa (
-  idEquipa INTEGER,
   idJogador INTEGER,
+  idEquipa INTEGER,
   FOREIGN KEY(idEquipa)
     REFERENCES Equipa(idEquipa)
       ON DELETE SET NULL
@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS EquipaPartida (
   resultado INTEGER,
   CHECK ( posicao > 0 ),
   FOREIGN KEY(idEquipa)
-    REFERENCES Equipa(INTEGER)
+    REFERENCES Equipa(idEquipa)
       ON DELETE SET NULL
       ON UPDATE CASCADE,
   FOREIGN KEY(idPartida)
@@ -211,7 +211,7 @@ CREATE TABLE IF NOT EXISTS Torneio (
   idFormato INTEGER,
   idTipoJogo INTEGER,
   FOREIGN KEY(idFormato)
-    REFERENCES TipoJogo(idFormato)
+    REFERENCES Formato(idFormato)
       ON DELETE SET NULL
       ON UPDATE CASCADE,
   FOREIGN KEY(idTipoJogo)
