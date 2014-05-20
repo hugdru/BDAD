@@ -1,19 +1,65 @@
 PRAGMA foreign_keys = ON;
 
+CREATE TABLE IF NOT EXISTS Pais (
+  idPais INTEGER,
+  nome varchar2(50),
+  PRIMARY KEY(idPais));
+
+CREATE TABLE IF NOT EXISTS Cidade (
+  idCidade INTEGER,
+  nome varchar2(50) NOT NULL,
+  idPais INTEGER NOT NULL,
+  FOREIGN KEY(idPais)
+    REFERENCES Pais(idPais)
+      ON DELETE SET NULL
+      ON UPDATE CASCADE,
+  PRIMARY KEY(idCidade));
+
+CREATE TABLE IF NOT EXISTS Extensao (
+  idExtensao INTEGER,
+  codigo char(3),
+  PRIMARY KEY(idExtensao));
+
+CREATE TABLE IF NOT EXISTS Arbitro (
+  idArbitro INTEGER,
+  nome varchar2(70) NOT NULL,
+  codigoPostal varchar2(10) NOT NULL,
+  dataNascimento date NOT NULL,
+  numeroAndar varchar2(20) NOT NULL,
+  rua varchar2(60) NOT NULL,
+  telefone char(9) NOT NULL,
+  idPais INTEGER NOT NULL,
+  idCidade INTEGER NOT NULL,
+  idExtensao INTEGER NOT NULL,
+  observacoes varchar2(100),
+  FOREIGN KEY(idPais)
+    REFERENCES Pais(idPais)
+      ON DELETE SET NULL
+      ON UPDATE CASCADE,
+  FOREIGN KEY(idCidade)
+    REFERENCES Cidade(idCidade)
+      ON DELETE SET NULL
+      ON UPDATE CASCADE,
+  FOREIGN KEY(idExtensao)
+    REFERENCES Extensao(idExtensao)
+      ON DELETE SET NULL
+      ON UPDATE CASCADE,
+  PRIMARY KEY(idArbitro));
+
 CREATE TABLE IF NOT EXISTS Jogador (
-  idJogador INTEGER AUTO_INCREMENT,
+  idJogador INTEGER,
   nome varchar2(70) NOT NULL,
   codigoPostal varchar2(10),
   dataNascimento date NOT NULL,
-  numeroAndar varchar2(20),
+  numeroAndar varchar2(35),
   rua varchar2(60),
   telefone char(9) NOT NULL,
-  idPais varchar2(50) NOT NULL,
+  idPais INTEGER NOT NULL,
   idCidade INTEGER,
   idExtensao INTEGER NOT NULL,
   email varchar2(254) NOT NULL,
   FOREIGN KEY(idPais)
-    REFERENCES Pais(nome)
+    REFERENCES Pais(idPais)
       ON DELETE SET NULL
       ON UPDATE CASCADE,
   FOREIGN KEY(idCidade)
@@ -27,15 +73,16 @@ CREATE TABLE IF NOT EXISTS Jogador (
   PRIMARY KEY(idJogador));
 
 CREATE TABLE IF NOT EXISTS Equipa (
+  idEquipa INTEGER,
   nome varchar2(60),
   abreviatura varchar2(10),
-  PRIMARY KEY(nome));
+  PRIMARY KEY(idEquipa));
 
 CREATE TABLE IF NOT EXISTS JogadorEquipa (
-  idEquipa varchar2(60),
+  idEquipa INTEGER,
   idJogador INTEGER,
   FOREIGN KEY(idEquipa)
-    REFERENCES Equipa(nome)
+    REFERENCES Equipa(idEquipa)
       ON DELETE SET NULL
       ON UPDATE CASCADE,
   FOREIGN KEY(idJogador)
@@ -44,34 +91,26 @@ CREATE TABLE IF NOT EXISTS JogadorEquipa (
       ON UPDATE CASCADE,
   PRIMARY KEY(idEquipa,idJogador));
 
-CREATE TABLE IF NOT EXISTS Arbitro (
-  idArbitro INTEGER AUTO_INCREMENT,
-  nome varchar2(70) NOT NULL,
-  codigoPostal varchar2(10) NOT NULL,
-  dataNascimento date NOT NULL,
-  numeroAndar varchar2(20) NOT NULL,
-  rua varchar2(60) NOT NULL,
-  telefone char(9) NOT NULL,
-  idPais varchar2(50) NOT NULL,
-  idCidade INTEGER NOT NULL,
-  idExtensao INTEGER NOT NULL,
-  observacoes varchar2(100),
-  FOREIGN KEY(idPais)
-    REFERENCES Pais(nome)
+CREATE TABLE IF NOT EXISTS TipoJogo (
+  idTipoJogo INTEGER,
+  nome varchar2(30),
+  PRIMARY KEY(idTipoJogo));
+
+CREATE TABLE IF NOT EXISTS ArbitroTipoJogo (
+  idArbitro INTEGER,
+  idTipoJogo INTEGER,
+  FOREIGN KEY(idArbitro)
+    REFERENCES Arbitro(idArbitro)
       ON DELETE SET NULL
       ON UPDATE CASCADE,
-  FOREIGN KEY(idCidade)
-    REFERENCES Cidade(idCidade)
+  FOREIGN KEY(idTipoJogo)
+    REFERENCES TipoJogo(idTipoJogo)
       ON DELETE SET NULL
       ON UPDATE CASCADE,
-  FOREIGN KEY(idExtensao)
-    REFERENCES Extensao(idExtensao)
-      ON DELETE SET NULL
-      ON UPDATE CASCADE,
-  PRIMARY KEY(idArbitro));
+  PRIMARY KEY(idArbitro,idTipoJogo));
 
 CREATE TABLE IF NOT EXISTS LocalEncontro (
-  idLocalEncontro INTEGER AUTO_INCREMENT,
+  idLocalEncontro INTEGER,
   idCidade INTEGER NOT NULL,
   idExtensao INTEGER NOT NULL,
   codigoPostal varchar2(10) NOT NULL,
@@ -87,47 +126,16 @@ CREATE TABLE IF NOT EXISTS LocalEncontro (
       ON UPDATE CASCADE,
   PRIMARY KEY(idLocalEncontro));
 
-CREATE TABLE IF NOT EXISTS Extensao (
-  idExtensao INTEGER AUTO_INCREMENT,
-  codigo char(3),
-  PRIMARY KEY(idExtensao));
-
-CREATE TABLE IF NOT EXISTS Pais (
-  nome varchar2(50),
-  PRIMARY KEY(nome));
-
-CREATE TABLE IF NOT EXISTS Cidade (
-  idCidade INTEGER AUTO_INCREMENT,
-  nome varchar2(50) NOT NULL,
-  idPais varchar2(50) NOT NULL,
-  FOREIGN KEY(idPais)
-    REFERENCES Pais(nome)
-      ON DELETE SET NULL
-      ON UPDATE CASCADE,
-  PRIMARY KEY(idCidade));
-
-CREATE TABLE IF NOT EXISTS TipoJogo (
+CREATE TABLE IF NOT EXISTS Escalao (
+  idEscalao INTEGER,
   nome varchar2(30),
-  PRIMARY KEY(nome));
-
-CREATE TABLE IF NOT EXISTS ArbitroTipoJogo (
-  idArbitro INTEGER,
-  idTipoJogo varchar2(30),
-  FOREIGN KEY(idArbitro)
-    REFERENCES Arbitro(idArbitro)
-      ON DELETE SET NULL
-      ON UPDATE CASCADE,
-  FOREIGN KEY(idTipoJogo)
-    REFERENCES TipoJogo(nome)
-      ON DELETE SET NULL
-      ON UPDATE CASCADE,
-  PRIMARY KEY(idArbitro,idTipoJogo));
+  PRIMARY KEY(idEscalao));
 
 CREATE TABLE IF NOT EXISTS Partida (
-  idPartida INTEGER AUTO_INCREMENT,
+  idPartida INTEGER,
   idLocalEncontro INTEGER,
   idTorneio INTEGER,
-  idEscalao varchar2(30),
+  idEscalao INTEGER,
   dataInicio date NOT NULL,
   duracao INTEGER,
   FOREIGN KEY(idLocalEncontro)
@@ -135,7 +143,7 @@ CREATE TABLE IF NOT EXISTS Partida (
       ON DELETE SET NULL
       ON UPDATE CASCADE,
   FOREIGN KEY(idEscalao)
-    REFERENCES Escalao(nome)
+    REFERENCES Escalao(idEscalao)
       ON DELETE SET NULL
       ON UPDATE CASCADE,
   FOREIGN KEY(idTorneio)
@@ -143,6 +151,22 @@ CREATE TABLE IF NOT EXISTS Partida (
       ON DELETE SET NULL
       ON UPDATE CASCADE,
   PRIMARY KEY(idPartida));
+
+CREATE TABLE IF NOT EXISTS EquipaPartida (
+  idEquipa INTEGER,
+  idPartida INTEGER,
+  posicao INTEGER NOT NULL,
+  resultado INTEGER,
+  CHECK ( posicao > 0 ),
+  FOREIGN KEY(idEquipa)
+    REFERENCES Equipa(INTEGER)
+      ON DELETE SET NULL
+      ON UPDATE CASCADE,
+  FOREIGN KEY(idPartida)
+    REFERENCES Partida(idPartida)
+      ON DELETE SET NULL
+      ON UPDATE CASCADE,
+  PRIMARY KEY(idEquipa,idPartida));
 
 CREATE TABLE IF NOT EXISTS ArbitroPartida (
   idArbitro INTEGER,
@@ -157,40 +181,21 @@ CREATE TABLE IF NOT EXISTS ArbitroPartida (
       ON UPDATE CASCADE,
   PRIMARY KEY(idArbitro,idPartida));
 
-CREATE TABLE IF NOT EXISTS Escalao (
-  nome varchar2(30),
-  PRIMARY KEY(nome));
-
-CREATE TABLE IF NOT EXISTS EquipaPartida (
-  idEquipa varchar2(60),
-  idPartida INTEGER,
-  posicao INTEGER NOT NULL,
-  resultado INTEGER,
-  CHECK ( posicao > 0 ),
-  FOREIGN KEY(idEquipa)
-    REFERENCES Equipa(nome)
-      ON DELETE SET NULL
-      ON UPDATE CASCADE,
-  FOREIGN KEY(idPartida)
-    REFERENCES Partida(idPartida)
-      ON DELETE SET NULL
-      ON UPDATE CASCADE,
-  PRIMARY KEY(idEquipa,idPartida));
-
 CREATE TABLE IF NOT EXISTS Patrocinador (
+  idPatrocinador INTEGER,
   nome varchar2(50),
-  PRIMARY KEY (nome));
+  PRIMARY KEY (idPatrocinador));
 
 CREATE TABLE IF NOT EXISTS EquipaPatrocinadorTorneio (
-  idEquipa varchar2(60),
-  idPatrocinador varchar2(50),
+  idEquipa INTEGER,
+  idPatrocinador INTEGER,
   idTorneio INTEGER,
   FOREIGN KEY(idEquipa)
-    REFERENCES Equipa(nome)
+    REFERENCES Equipa(idEquipa)
       ON DELETE SET NULL
       ON UPDATE CASCADE,
   FOREIGN KEY(idPatrocinador)
-    REFERENCES Patrocinador(nome)
+    REFERENCES Patrocinador(idPatrocinador)
       ON DELETE SET NULL
       ON UPDATE CASCADE,
   FOREIGN KEY(idTorneio)
@@ -200,13 +205,22 @@ CREATE TABLE IF NOT EXISTS EquipaPatrocinadorTorneio (
   PRIMARY KEY(idEquipa,idPatrocinador,idTorneio));
 
 CREATE TABLE IF NOT EXISTS Torneio (
-  idTorneio INTEGER AUTO_INCREMENT,
+  idTorneio INTEGER,
   nome varchar2(30),
   temporada TEXT,
-  formato varchar2(20),
-  idTipoJogo varchar2(30),
-  FOREIGN KEY(IdTipoJogo)
-    REFERENCES TipoJogo(nome)
+  idFormato INTEGER,
+  idTipoJogo INTEGER,
+  FOREIGN KEY(idFormato)
+    REFERENCES TipoJogo(idFormato)
+      ON DELETE SET NULL
+      ON UPDATE CASCADE,
+  FOREIGN KEY(idTipoJogo)
+    REFERENCES TipoJogo(idTipoJogo)
       ON DELETE SET NULL
       ON UPDATE CASCADE,
   PRIMARY KEY(idTorneio));
+
+CREATE TABLE IF NOT EXISTS Formato (
+  idFormato INTEGER,
+  nome varchar2(25),
+  PRIMARY KEY(idFormato));
