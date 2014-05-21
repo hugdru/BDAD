@@ -6,5 +6,6 @@
 * Ordenar os schemas do mais simples para o mais complexo
 * Fazer drops das tabelas no ínicio
 * Mudar a parte do texto sobre o código postal e rever as dependências funcionais a ela associadas.
+* Adicionar mais inserts de modo a tornar as pesquisas mais interessantes
 * Escrever algum código para as pesquisas
 * Arranjar algumas ideias para o triggers
