@@ -22,7 +22,3 @@
 * Melhorar a apresentação
 * Legendar as associações
 * Meter formato numa tabela à parte, um torneio só pode ter um formato.
-
-
-
-
