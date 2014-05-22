@@ -3,7 +3,7 @@
 ## Relatório ##
 * Melhorar a apresentação.
 * Falar um pouco sobre os triggers que foram usados e que estao presentes no ficheiro boardDb.sql
-* ----------------------------
+----------------------------
 * Mudar as chaves primárias para um inteiro em vez de carateres em algumas tabelas. DONE
 * Meter formato numa tabela à parte. DONE
 * Ordenar os schemas do mais simples para o mais complexo. DONE
@@ -14,7 +14,7 @@
 ## Ficheiros .sql ##
 * Escrever o código para as pesquisas
 * Arranjar algumas ideias para o triggers e fazer a implementação
-* ----------------------------
+----------------------------
 * Fazer drops das tabelas no ínicio, boardDb.sql DONE
 * Delete dos inserts das tabelas, inserts.sql DONE
 * Mudar as chaves primárias para um inteiro em vez de carateres em algumas tabelas DONE
