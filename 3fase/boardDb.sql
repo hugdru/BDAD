@@ -1,11 +1,31 @@
 PRAGMA foreign_keys = ON;
 
-CREATE TABLE IF NOT EXISTS Pais (
+DROP TABLE IF EXISTS Pais;
+DROP TABLE IF EXISTS Cidade;
+DROP TABLE IF EXISTS Extensao;
+DROP TABLE IF EXISTS Arbitro;
+DROP TABLE IF EXISTS Jogador;
+DROP TABLE IF EXISTS Equipa;
+DROP TABLE IF EXISTS JogadorEquipa;
+DROP TABLE IF EXISTS TipoJogo;
+DROP TABLE IF EXISTS ArbitroTipoJogo;
+DROP TABLE IF EXISTS LocalEncontro;
+DROP TABLE IF EXISTS Escalao;
+DROP TABLE IF EXISTS Partida;
+DROP TABLE IF EXISTS Equipa;
+DROP TABLE IF EXISTS EquipaPartida;
+DROP TABLE IF EXISTS ArbitroPartida;
+DROP TABLE IF EXISTS Patrocinador;
+DROP TABLE IF EXISTS EquipaPatrocinadorTorneio;
+DROP TABLE IF EXISTS Torneio;
+DROP TABLE IF EXISTS Formato;
+
+CREATE TABLE Pais (
   idPais INTEGER,
   nome varchar2(50),
   PRIMARY KEY(idPais));
 
-CREATE TABLE IF NOT EXISTS Cidade (
+CREATE TABLE Cidade (
   idCidade INTEGER,
   nome varchar2(50) NOT NULL,
   idPais INTEGER NOT NULL,
@@ -15,12 +35,12 @@ CREATE TABLE IF NOT EXISTS Cidade (
       ON UPDATE CASCADE,
   PRIMARY KEY(idCidade));
 
-CREATE TABLE IF NOT EXISTS Extensao (
+CREATE TABLE Extensao (
   idExtensao INTEGER,
-  codigo char(3),
+  codigo char(4),
   PRIMARY KEY(idExtensao));
 
-CREATE TABLE IF NOT EXISTS Arbitro (
+CREATE TABLE Arbitro (
   idArbitro INTEGER,
   nome varchar2(70) NOT NULL,
   codigoPostal varchar2(10) NOT NULL,
@@ -46,7 +66,7 @@ CREATE TABLE IF NOT EXISTS Arbitro (
       ON UPDATE CASCADE,
   PRIMARY KEY(idArbitro));
 
-CREATE TABLE IF NOT EXISTS Jogador (
+CREATE TABLE Jogador (
   idJogador INTEGER,
   nome varchar2(70) NOT NULL,
   codigoPostal varchar2(10),
@@ -55,7 +75,7 @@ CREATE TABLE IF NOT EXISTS Jogador (
   rua varchar2(60),
   telefone char(9) NOT NULL,
   idPais INTEGER NOT NULL,
-  idCidade INTEGER,
+  idCidade INTEGER NOT NULL,
   idExtensao INTEGER NOT NULL,
   email varchar2(254) NOT NULL,
   FOREIGN KEY(idPais)
@@ -72,13 +92,13 @@ CREATE TABLE IF NOT EXISTS Jogador (
       ON UPDATE CASCADE,
   PRIMARY KEY(idJogador));
 
-CREATE TABLE IF NOT EXISTS Equipa (
+CREATE TABLE Equipa (
   idEquipa INTEGER,
-  nome varchar2(60),
+  nome varchar2(60) NOT NULL,
   abreviatura varchar2(10),
   PRIMARY KEY(idEquipa));
 
-CREATE TABLE IF NOT EXISTS JogadorEquipa (
+CREATE TABLE JogadorEquipa (
   idJogador INTEGER,
   idEquipa INTEGER,
   FOREIGN KEY(idEquipa)
@@ -91,12 +111,12 @@ CREATE TABLE IF NOT EXISTS JogadorEquipa (
       ON UPDATE CASCADE,
   PRIMARY KEY(idEquipa,idJogador));
 
-CREATE TABLE IF NOT EXISTS TipoJogo (
+CREATE TABLE TipoJogo (
   idTipoJogo INTEGER,
-  nome varchar2(30),
+  nome varchar2(30) NOT NULL,
   PRIMARY KEY(idTipoJogo));
 
-CREATE TABLE IF NOT EXISTS ArbitroTipoJogo (
+CREATE TABLE ArbitroTipoJogo (
   idArbitro INTEGER,
   idTipoJogo INTEGER,
   FOREIGN KEY(idArbitro)
@@ -109,7 +129,7 @@ CREATE TABLE IF NOT EXISTS ArbitroTipoJogo (
       ON UPDATE CASCADE,
   PRIMARY KEY(idArbitro,idTipoJogo));
 
-CREATE TABLE IF NOT EXISTS LocalEncontro (
+CREATE TABLE LocalEncontro (
   idLocalEncontro INTEGER,
   idCidade INTEGER NOT NULL,
   idExtensao INTEGER NOT NULL,
@@ -126,16 +146,16 @@ CREATE TABLE IF NOT EXISTS LocalEncontro (
       ON UPDATE CASCADE,
   PRIMARY KEY(idLocalEncontro));
 
-CREATE TABLE IF NOT EXISTS Escalao (
+CREATE TABLE Escalao (
   idEscalao INTEGER,
-  nome varchar2(30),
+  nome varchar2(30) NOT NULL,
   PRIMARY KEY(idEscalao));
 
-CREATE TABLE IF NOT EXISTS Partida (
+CREATE TABLE Partida (
   idPartida INTEGER,
-  idLocalEncontro INTEGER,
-  idTorneio INTEGER,
-  idEscalao INTEGER,
+  idLocalEncontro INTEGER NOT NULL,
+  idTorneio INTEGER NOT NULL,
+  idEscalao INTEGER NOT NULL,
   dataInicio date NOT NULL,
   duracao INTEGER,
   FOREIGN KEY(idLocalEncontro)
@@ -152,7 +172,7 @@ CREATE TABLE IF NOT EXISTS Partida (
       ON UPDATE CASCADE,
   PRIMARY KEY(idPartida));
 
-CREATE TABLE IF NOT EXISTS EquipaPartida (
+CREATE TABLE EquipaPartida (
   idEquipa INTEGER,
   idPartida INTEGER,
   posicao INTEGER NOT NULL,
@@ -168,7 +188,7 @@ CREATE TABLE IF NOT EXISTS EquipaPartida (
       ON UPDATE CASCADE,
   PRIMARY KEY(idEquipa,idPartida));
 
-CREATE TABLE IF NOT EXISTS ArbitroPartida (
+CREATE TABLE ArbitroPartida (
   idArbitro INTEGER,
   idPartida INTEGER,
   FOREIGN KEY(idArbitro)
@@ -181,12 +201,12 @@ CREATE TABLE IF NOT EXISTS ArbitroPartida (
       ON UPDATE CASCADE,
   PRIMARY KEY(idArbitro,idPartida));
 
-CREATE TABLE IF NOT EXISTS Patrocinador (
+CREATE TABLE Patrocinador (
   idPatrocinador INTEGER,
-  nome varchar2(50),
+  nome varchar2(50) NOT NULL,
   PRIMARY KEY (idPatrocinador));
 
-CREATE TABLE IF NOT EXISTS EquipaPatrocinadorTorneio (
+CREATE TABLE EquipaPatrocinadorTorneio (
   idEquipa INTEGER,
   idPatrocinador INTEGER,
   idTorneio INTEGER,
@@ -204,12 +224,12 @@ CREATE TABLE IF NOT EXISTS EquipaPatrocinadorTorneio (
       ON UPDATE CASCADE,
   PRIMARY KEY(idEquipa,idPatrocinador,idTorneio));
 
-CREATE TABLE IF NOT EXISTS Torneio (
+CREATE TABLE Torneio (
   idTorneio INTEGER,
   nome varchar2(30),
   temporada TEXT,
-  idFormato INTEGER,
-  idTipoJogo INTEGER,
+  idFormato INTEGER NOT NULL,
+  idTipoJogo INTEGER NOT NULL,
   FOREIGN KEY(idFormato)
     REFERENCES Formato(idFormato)
       ON DELETE SET NULL
@@ -220,7 +240,7 @@ CREATE TABLE IF NOT EXISTS Torneio (
       ON UPDATE CASCADE,
   PRIMARY KEY(idTorneio));
 
-CREATE TABLE IF NOT EXISTS Formato (
+CREATE TABLE Formato (
   idFormato INTEGER,
-  nome varchar2(25),
+  nome varchar2(25) NOT NULL,
   PRIMARY KEY(idFormato));
