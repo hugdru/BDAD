@@ -72,28 +72,37 @@ WHERE
 ORDER BY JogadorEquipa.idEquipa ASC;
 
 -- Contar o numero de equipas em que os jogadores estao inscritos
--- SELECT Jogador.idJogador, Jogador.nome, COUNT(*)
--- FROM Jogador, JogadorEquipa
--- WHERE Jogador.idJogador = JogadorEquipa.idJogador;
-
-
--- Encontrar o vencedor do torneio para cada escalão
-
--- Encontrar o jogador com mais pontos de uma Equipa, para todos os jogos que ele efetuou
+SELECT Jogador.idJogador, Jogador.nome, COUNT(*) AS numeroInscricoesEquipas
+FROM Jogador, JogadorEquipa
+WHERE Jogador.idJogador = JogadorEquipa.idJogador
+GROUP BY Jogador.idJogador;
 
 -- Encontrar o jogador com mais pontos
+SELECT idJogador, nome, Pais, MAX(Pontos) FROM (
+  SELECT Jogador.idJogador, Jogador.nome, (SELECT Pais.nome FROM Pais WHERE Pais.idPais = Jogador.idPais) AS Pais, SUM(EquipaPartida.resultado) AS Pontos
+  FROM Jogador, JogadorEquipa, EquipaPartida
+  WHERE
+    Jogador.idJogador = JogadorEquipa.idJogador AND
+    JogadorEquipa.idEquipa IN ( SELECT EquipaPartida.idEquipa FROM EquipaPartida )
+  GROUP BY Jogador.idJogador );
+
+-- Encontrar o jogador com mais pontos de uma Equipa, para todos os jogos/partidas que ele efetuou
+
+-- Encontrar a media e o desvio padrão dos pontos dos jogadores de uma equipa.
 
 -- Encontrar a equipa com mais pontos
 
+-- Encontrar a equipa com mais pontos para um tipo de jogo
+
 -- Encontrar a equipa com mais pontos para um dado jogo e escalão
 
--- Encontrar a equipa com mais pontos num dado ano
+-- Encontrar a equipa com mais pontos para um dado torneio num dado escalão
+
+-- Encontrar o vencedor do torneio para cada escalão
 
 -- Ver qual é o país mais comum
 
--- Ver a duração media dos jogos de um dado escalão para um dado jogo
+-- Ver a duração média dos jogos de um dado escalão para um dado jogo
 
--- Encontrar a duração total
-
--- Encontrar a media e o desvio padrão dos pontos dos jogadores de uma equipa.
+-- Encontrar a duração total para um dado jogo para um dado escalao
 
