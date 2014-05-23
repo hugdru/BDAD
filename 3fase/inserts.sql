@@ -94,7 +94,7 @@ INSERT INTO Jogador VALUES (NULL,'Cristiano','9700','6/7/1988','123','Beco da Ve
 INSERT INTO Jogador VALUES (NULL,'André','10750','23/7/1983','98','Rua dos Sapateiros', '116010119', 8, 7, 6, 'andreandreandrade@gmail.com');
 INSERT INTO Jogador VALUES (NULL,'Marta','11019','9/7/1979','231','Rua Maria dos Sapos', '426005823', 9, 8, 8, 'martinha@gmail.com');
 INSERT INTO Jogador VALUES (NULL,'Vitória','12992','6/12/1984','98','Beco das Granadas', '525121123', 6, 1, 1, 'vitoriaaa@gmail.com');
-INSERT INTO Jogador VALUES (NULL,'Victor','12992','9/9/1990','98','Beco das Granadas', '525121122', 6, 1, 1, 'vitoriaaa@gmail.com');
+INSERT INTO Jogador VALUES (NULL,'Victor','12992','9/9/1990','98','Beco das Granadas', '525121122', 6, 1, 1, 'vitor@gmail.com');
 
 INSERT INTO JogadorEquipa VALUES (12, 7);
 INSERT INTO JogadorEquipa VALUES (11, 7);
