@@ -11,7 +11,6 @@ DELETE FROM TipoJogo;
 DELETE FROM ArbitroTipoJogo;
 DELETE FROM LocalEncontro;
 DELETE FROM Escalao;
-DELETE FROM Equipa;
 DELETE FROM EquipaPartida;
 DELETE FROM ArbitroPartida;
 DELETE FROM Patrocinador;
