@@ -83,12 +83,60 @@ SELECT idJogador, nome, Pais, MAX(Pontos) FROM (
   FROM Jogador, JogadorEquipa, EquipaPartida
   WHERE
     Jogador.idJogador = JogadorEquipa.idJogador AND
-    JogadorEquipa.idEquipa IN ( SELECT EquipaPartida.idEquipa FROM EquipaPartida )
-  GROUP BY Jogador.idJogador );
+    JogadorEquipa.idEquipa = EquipaPartida.idEquipa
+  GROUP BY Jogador.idJogador);
+
+-- Pontuação total por jogador
+SELECT Jogador.idJogador, Jogador.nome, (SELECT Pais.nome FROM Pais WHERE Pais.idPais = Jogador.idPais) AS Pais, SUM(EquipaPartida.resultado) AS Pontos
+FROM Jogador, JogadorEquipa, EquipaPartida
+WHERE
+  Jogador.idJogador = JogadorEquipa.idJogador
+  AND
+  JogadorEquipa.idEquipa = EquipaPartida.idEquipa
+GROUP BY Jogador.idJogador;
+
+-- Encontrar a pontuação de todos os jogadores de uma equipa para todas as partidas que eles realizaram
+SELECT JogadorEquipa.idJogador AS idJogador, ( SELECT Jogador.nome FROM Jogador WHERE Jogador.idJogador = JogadorEquipa.idJogador ) AS Nome, ( SELECT Pais.nome FROM Pais WHERE Pais.idPais = ( SELECT Jogador.idPais FROM Jogador WHERE Jogador.idJogador = JogadorEquipa.idJogador )) AS Pais, SUM(EquipaPartida.resultado) AS Pontos
+FROM JogadorEquipa, EquipaPartida
+WHERE
+  JogadorEquipa.idJogador IN ( SELECT JogadorEquipa.idJogador FROM JogadorEquipa WHERE JogadorEquipa.idEquipa = ( SELECT Equipa.idEquipa FROM Equipa WHERE Equipa.nome LIKE 'godmode' AND Equipa.abreviatura LIKE 'gdm'))
+  AND
+  JogadorEquipa.idEquipa = EquipaPartida.idEquipa
+GROUP BY JogadorEquipa.idJogador;
 
 -- Encontrar o jogador com mais pontos de uma Equipa, para todos os jogos/partidas que ele efetuou
+SELECT idJogador, Nome, Pais, MAX(Pontos) pontosMaximosEquipaGODMODE
+FROM (
+  SELECT JogadorEquipa.idJogador AS idJogador, ( SELECT Jogador.nome FROM Jogador WHERE Jogador.idJogador = JogadorEquipa.idJogador ) AS Nome, ( SELECT Pais.nome FROM Pais WHERE Pais.idPais = ( SELECT Jogador.idPais FROM Jogador WHERE Jogador.idJogador = JogadorEquipa.idJogador )) AS Pais, SUM(EquipaPartida.resultado) AS Pontos
+  FROM JogadorEquipa, EquipaPartida
+  WHERE
+    JogadorEquipa.idJogador IN ( SELECT JogadorEquipa.idJogador FROM JogadorEquipa WHERE JogadorEquipa.idEquipa = ( SELECT Equipa.idEquipa FROM Equipa WHERE Equipa.nome LIKE 'godmode' AND Equipa.abreviatura LIKE 'gdm'))
+    AND
+    JogadorEquipa.idEquipa = EquipaPartida.idEquipa
+  GROUP BY JogadorEquipa.idJogador);
 
--- Encontrar a media e o desvio padrão dos pontos dos jogadores de uma equipa.
+-- Encontrar a variância dos pontos dos jogadores de uma equipa. Sqlite nao tem raiz quadrada, era melhor calcular o desvio padrao.
+CREATE TEMP TABLE PontosTemp( Pontos INTEGER );
+
+INSERT INTO PontosTemp
+SELECT Pontos
+FROM (
+  SELECT JogadorEquipa.idJogador AS idJogador, ( SELECT Jogador.nome FROM Jogador WHERE Jogador.idJogador = JogadorEquipa.idJogador ) AS Nome, ( SELECT Pais.nome FROM Pais WHERE Pais.idPais = ( SELECT Jogador.idPais FROM Jogador WHERE Jogador.idJogador = JogadorEquipa.idJogador )) AS Pais, SUM(EquipaPartida.resultado) AS Pontos
+  FROM JogadorEquipa, EquipaPartida
+  WHERE
+    JogadorEquipa.idJogador IN ( SELECT JogadorEquipa.idJogador FROM JogadorEquipa WHERE JogadorEquipa.idEquipa = ( SELECT Equipa.idEquipa FROM Equipa WHERE Equipa.nome LIKE 'godmode' AND Equipa.abreviatura LIKE 'gdm'))
+    AND
+    JogadorEquipa.idEquipa = EquipaPartida.idEquipa
+  GROUP BY JogadorEquipa.idJogador);
+
+SELECT * FROM PontosTemp;
+
+SELECT SUMATORIO/(COUNT(Pontos)-1) AS Variancia FROM PontosTemp, (
+  SELECT SUM(distancias) AS SUMATORIO FROM (
+    SELECT ((Pontos - Media)*(Pontos - Media)) AS distancias FROM PontosTemp, (
+      SELECT AVG(Pontos) AS Media FROM PontosTemp )));
+
+DROP TABLE IF EXISTS PontosTemp;
 
 -- Encontrar a equipa com mais pontos
 
