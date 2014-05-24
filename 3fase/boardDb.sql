@@ -157,6 +157,7 @@ CREATE TABLE Partida (
   idEscalao INTEGER NOT NULL,
   dataInicio date NOT NULL,
   duracao INTEGER,
+  CHECK ( duracao > 0 ),
   FOREIGN KEY(idLocalEncontro)
     REFERENCES LocalEncontro(idLocalEncontro)
       ON DELETE SET NULL

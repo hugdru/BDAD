@@ -24,6 +24,7 @@ WHERE
   JogadorEquipa.idEquipa = Equipa.idEquipa;
 
 -- Encontrar o nome, o email e a nacionalidade de todos os jogadores que participaram num dado torneio
+-- Dúvida torneio.nome não é chave primária por isso pode haver mais que um torneio com esse nome.. Peço as colunas todas?
 SELECT JogadorEquipa.idEquipa, (SELECT Equipa.nome FROM Equipa WHERE JogadorEquipa.idEquipa = Equipa.idEquipa) AS NomeEquipa, Jogador.nome, Jogador.email, Pais.nome AS Pais
 FROM Jogador, JogadorEquipa, Pais
 WHERE
@@ -115,7 +116,7 @@ FROM (
     JogadorEquipa.idEquipa = EquipaPartida.idEquipa
   GROUP BY JogadorEquipa.idJogador);
 
--- Encontrar a variância dos pontos dos jogadores de uma equipa. Sqlite nao tem raiz quadrada, era melhor calcular o desvio padrao.
+-- Encontrar a variância dos pontos dos jogadores de uma equipa. Sqlite nao tem raiz quadrada muito menos uma funcao que calcule o desvio padrao ou a variancia, era melhor calcular o desvio padrao. Por isso usei uma tabela auxiliar.
 CREATE TEMP TABLE PontosTemp( Pontos INTEGER );
 
 INSERT INTO PontosTemp
@@ -139,18 +140,48 @@ SELECT SUMATORIO/(COUNT(Pontos)-1) AS Variancia FROM PontosTemp, (
 DROP TABLE IF EXISTS PontosTemp;
 
 -- Encontrar a equipa com mais pontos
+SELECT idEquipa, nomeEquipa, MAX(Pontos)
+FROM (
+  SELECT EquipaPartida.idEquipa, ( SELECT Equipa.nome FROM Equipa WHERE Equipa.idEquipa = EquipaPartida.idEquipa ) AS nomeEquipa, SUM(EquipaPartida.Resultado) AS Pontos
+  FROM EquipaPartida
+  GROUP BY EquipaPartida.idEquipa);
 
--- Encontrar a equipa com mais pontos para um tipo de jogo
-
--- Encontrar a equipa com mais pontos para um dado jogo e escalão
+-- Encontrar a equipa com mais pontos para um tipo de jogo e escalão
+SELECT idEquipa, nomeEquipa, MAX(Pontos)
+FROM (
+  SELECT EquipaPartida.idEquipa, ( SELECT Equipa.nome FROM Equipa WHERE Equipa.idEquipa = EquipaPartida.idEquipa ) AS nomeEquipa, SUM(EquipaPartida.Resultado) AS Pontos
+  FROM EquipaPartida, Partida
+  WHERE
+    EquipaPartida.idPartida = Partida.idPartida AND
+    Partida.idEscalao = ( SELECT Escalao.idEscalao FROM Escalao WHERE Escalao.nome LIKE 'iniciados' ) AND
+    Partida.idTorneio IN ( SELECT Torneio.idTorneio FROM Torneio WHERE Torneio.idTipoJogo = ( SELECT TipoJogo.idTipoJogo FROM TipoJogo WHERE TipoJogo.nome LIKE 'sueca' ) )
+  GROUP BY EquipaPartida.idEquipa);
 
 -- Encontrar a equipa com mais pontos para um dado torneio num dado escalão
-
--- Encontrar o vencedor do torneio para cada escalão
+-- Dúvida em torneio podem haver varios torneios com o mesmo nome... Procura-se com um id ? Ou pede-se todos os campos ?
+SELECT idEquipa, nomeEquipa, MAX(Pontos)
+FROM (
+  SELECT EquipaPartida.idEquipa, ( SELECT Equipa.nome FROM Equipa WHERE Equipa.idEquipa = EquipaPartida.idEquipa ) AS nomeEquipa, SUM(EquipaPartida.Resultado) AS Pontos
+  FROM EquipaPartida, Partida
+  WHERE
+    EquipaPartida.idPartida = Partida.idPartida AND
+    Partida.idEscalao = ( SELECT Escalao.idEscalao FROM Escalao WHERE Escalao.nome LIKE 'iniciados' ) AND
+    Partida.idTorneio = 2
+  GROUP BY EquipaPartida.idEquipa );
 
 -- Ver qual é o país mais comum
+SELECT ( SELECT Pais.nome FROM Pais WHERE Pais.idPais = idPais ) AS Pais, MAX(Total) FROM (
+  SELECT idPais, COUNT(*) AS Total FROM (
+    SELECT nome, idPais FROM Arbitro
+    UNION
+    SELECT nome, idPais FROM Jogador
+    ORDER BY idPais ASC)
+  GROUP BY idPais);
 
--- Ver a duração média dos jogos de um dado escalão para um dado jogo
-
--- Encontrar a duração total para um dado jogo para um dado escalao
-
+-- Ver a duração média dos jogos de um dado escalão para um dado tipo jogo
+SELECT TipoJogo.nome AS TipoJogo, AVG(duracao)
+FROM Torneio, Partida, TipoJogo
+WHERE
+  TipoJogo.nome LIKE 'xadrez' AND
+  TipoJogo.idTipoJogo = Torneio.idTipoJogo AND
+  Partida.idTorneio = Torneio.idTorneio;
