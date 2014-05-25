@@ -24,7 +24,7 @@ WHERE
   JogadorEquipa.idEquipa = Equipa.idEquipa;
 
 -- Encontrar o nome, o email e a nacionalidade de todos os jogadores que participaram num dado torneio
--- Dúvida torneio.nome não é chave primária por isso pode haver mais que um torneio com esse nome.. Peço as colunas todas?
+-- Dúvida torneio.nome não é chave primária por isso pode haver mais que um torneio com esse nome.. Melhor maneira -> Peço as colunas todas?
 SELECT JogadorEquipa.idEquipa, (SELECT Equipa.nome FROM Equipa WHERE JogadorEquipa.idEquipa = Equipa.idEquipa) AS NomeEquipa, Jogador.nome, Jogador.email, Pais.nome AS Pais
 FROM Jogador, JogadorEquipa, Pais
 WHERE
@@ -54,7 +54,7 @@ WHERE
           Partida.idEscalao = ( SELECT idEscalao FROM Escalao WHERE Escalao.nome LIKE 'minis')))
 ORDER BY JogadorEquipa.idEquipa ASC;
 
--- Encontrar o nome, o email e a nacionalidade de todos os jogadores que jogam um tipo de jogo num dado escalao.
+-- Encontrar o nome, o email e a nacionalidade de todos os jogadores que jogam um tipo de jogo num dado escalão.
 SELECT (SELECT Equipa.nome FROM Equipa WHERE JogadorEquipa.idEquipa = Equipa.idEquipa) AS NomeEquipa, Jogador.nome, Jogador.email, Pais.nome AS Pais
 FROM Jogador, JogadorEquipa, Pais
 WHERE
@@ -72,7 +72,7 @@ WHERE
           Partida.idEscalao = (SELECT idEscalao FROM Escalao WHERE Escalao.nome LIKE 'minis')))
 ORDER BY JogadorEquipa.idEquipa ASC;
 
--- Contar o numero de equipas em que os jogadores estao inscritos
+-- Contar o número de equipas em que os jogadores estão inscritos
 SELECT Jogador.idJogador, Jogador.nome, COUNT(*) AS numeroInscricoesEquipas
 FROM Jogador, JogadorEquipa
 WHERE Jogador.idJogador = JogadorEquipa.idJogador
@@ -116,7 +116,7 @@ FROM (
     JogadorEquipa.idEquipa = EquipaPartida.idEquipa
   GROUP BY JogadorEquipa.idJogador);
 
--- Encontrar a variância dos pontos dos jogadores de uma equipa. Sqlite nao tem raiz quadrada muito menos uma funcao que calcule o desvio padrao ou a variancia, era melhor calcular o desvio padrao. Por isso usei uma tabela auxiliar.
+-- Encontrar a variância dos pontos dos jogadores de uma equipa. Sqlite não tem raiz quadrada muito menos uma função que calcule o desvio padrão ou a variância, era melhor calcular o desvio padrão. Foi necessário usar uma tabela temporária para posterior manipulação dos pontos (contas).
 CREATE TEMP TABLE PontosTemp( Pontos INTEGER );
 
 INSERT INTO PontosTemp
@@ -158,7 +158,7 @@ FROM (
   GROUP BY EquipaPartida.idEquipa);
 
 -- Encontrar a equipa com mais pontos para um dado torneio num dado escalão
--- Dúvida em torneio podem haver varios torneios com o mesmo nome... Procura-se com um id ? Ou pede-se todos os campos ?
+-- Dúvida em torneio podem haver vários torneios com o mesmo nome... Melhor maneira -> Procura-se com um id ? Ou pede-se todos os campos ?
 SELECT idEquipa, nomeEquipa, MAX(Pontos)
 FROM (
   SELECT EquipaPartida.idEquipa, ( SELECT Equipa.nome FROM Equipa WHERE Equipa.idEquipa = EquipaPartida.idEquipa ) AS nomeEquipa, SUM(EquipaPartida.Resultado) AS Pontos
