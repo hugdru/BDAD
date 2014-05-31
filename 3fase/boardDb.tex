@@ -46,7 +46,7 @@ Num torneio de jogos de tabuleiro podem haver várias partidas entre duas ou mai
 
 %explicar como fizemos o mapeamento para o modelo relacional e qual o nível de normalização.
 \section{Passagem ao modelo relacional e normalização}
-A transição do diagrama de classes para o schema da base de dados foi feita sem grandes problemas. Optámos por separar a generalização em duas tabelas segundo o estilo orientado a objetos, porque ao fazer isto ficamos no ponto de equilibro entre poupar nas ligações de tabelas e nos recursos de armazenamento. Uma relação, menos ligações embora haja desperdício de armazenamento; Três relações, mais ligações e mesmo uso de recursos de armazenamento. A restrição de especialização é do tipo complete e disjoint, visto que a classe base, Pessoa, só serve de template (classe virtual) e devido à impossibilidade de uma Pessoa ser árbitro e jogador.
+A transição do diagrama de classes para o schema da base de dados foi feita sem grandes problemas. Optámos por separar a generalização em duas tabelas segundo o estilo orientado a objetos. Porque ao fazer isto, ficamos no ponto de equilíbrio entre poupar nas ligações de tabelas e nos recursos de armazenamento. Uma relação, menos ligações embora haja desperdício de armazenamento; Três relações, mais ligações e mesmo uso de recursos de armazenamento. A restrição de especialização é do tipo complete e disjoint, visto que a classe base, Pessoa, só serve de template (classe virtual) e devido à impossibilidade de uma Pessoa ser árbitro e jogador.
 \\\newline
 A única ternária no nosso uml foi decomposta em EquipaPatrocinadorTorneio e a classe de associação em EquipaPartida. Mais as tabelas de "apoio". Na tabela Jogador o idPais->País tem o significado de Nacionalidade e idCidade->Cidade é um "apontador" para uma cidade que por sua vez está associada a um País, e representa a cidade onde ele reside. O telefone e a extensão podem não estar ligados nem ao País nem à morada de uma Pessoa, por isso não servem de determinante para nenhum desses atributos, porque uma Pessoa pode viver num País, ser de outro e ter um contacto registado ainda noutro País.
 \\\newline
@@ -74,7 +74,7 @@ As relações muitos para muitos foram decompostas da maneira tradicional, uma t
 \textbf{EquipaPartida}(\underline{idEquipa->Equipa}, \underline{idPartida->Partida}, posicao, resultado) \\
 \textbf{EquipaPatrocinadorTorneio}(\underline{idEquipa->Equipa}, \underline{idPatrocinador->Patrocinador}, \underline{idTorneio->Torneio})
 \\\newline
-A nossa base de dados de início encontra-se na 3ª Forma Normal, visto que respeita a 1ª, 2ª, 3ª formas normais. Deste modo a nossa base de dados evita algumas anomalias: redundância de dados, atualização de campos, campos sinónimos, entre outros. Não continuámos a normalizar para além da 3ª Forma Normal porque isto tornaria a nossa base de dados mais lenta devido à quantidade de ligações, mais difícil de pesquisar e por não ser exigido pelos docentes. Todas as nossas relações estão na 1ª Forma Normal porque são respeitadas as regras das tabelas e porque em cada relação está definida uma chave primária. Também está na 2ª visto que nenhum subconjunto das chaves primárias determina um atributo não chave, as nossas relações só têm uma chave ou são todas chaves portanto respeitam de imediato esta Forma Normal. Excepto a classe de associação que é necessário identificar se um subconjunto da chave identifica um atributo não chave, que não se verifica, portanto está na segunda Forma Normal. Para respeitar a 3ª Forma Normal não podem haver dependências funcionais transitivas, A->B \&\& B->C, que não acontece na nossa bases de dados. A única razão para a nossa base de dados não respeitar a BCNF restringe-se às relações Árbitro e Jogador, porque existe um determinante em cada uma das relações que não é chave candidata, a dependência funcional idCidade->Cidade,rua ---> codigoPostal. Isto é, se partirmos do ponto de vista que é possível determinar o código postal sabendo a Rua, a Cidade e o País em causa (o país está relacionado com Cidade). Cada Cidade tem um nome, um "apontador" para um País e um código único que serve de chave primária.
+A nossa base de dados encontra-se na 3ª Forma Normal, visto que respeita a 1ª, 2ª, 3ª formas normais. Deste modo a nossa base de dados evita algumas anomalias: redundância de dados, atualização de campos, campos sinónimos, etc. Não continuámos a normalizar para além da 3ª Forma Normal porque isto tornaria a nossa base de dados mais lenta devido à quantidade de ligações, mais difícil de pesquisar e por não ser exigido pelos docentes. Todas as nossas relações estão na 1ª Forma Normal porque são respeitadas as regras das tabelas e porque em cada relação está definida uma chave primária. Também está na 2ª visto que nenhum subconjunto das chaves primárias determina um atributo não chave, as nossas relações só têm uma chave ou são todas chaves portanto respeitam de imediato esta Forma Normal. Excepto a classe de associação que é necessário identificar se um subconjunto da chave identifica um atributo não chave, que não se verifica, portanto está na segunda Forma Normal. Para respeitar a 3ª Forma Normal não podem haver dependências funcionais transitivas, A->B \&\& B->C, que não acontece na nossa bases de dados. A única razão para a nossa base de dados não respeitar a BCNF restringe-se às relações Árbitro e Jogador, porque existe um determinante em cada uma das relações que não é chave candidata, a dependência funcional idCidade->Cidade,rua ---> codigoPostal. Isto é, se partirmos do ponto de vista que é possível determinar o código postal sabendo a Rua, a Cidade e o País em causa (o país está relacionado com Cidade). Cada Cidade tem um nome, um "apontador" para um País e um código único que serve de chave primária.
 
 %indicar o tipo de restrições que foram usadas e a criação das tabelas
 \section{Linguagem de Definição de dados e Restrições}
@@ -83,8 +83,13 @@ O ficheiro de criação da base de dados chama-se boardDb.sql, e para além do �
 \textbf{Restrições de valor:} NOT NULL e de limites de atributos. \\
 \textbf{Restrições entre atributos:} não foi utilizado porque não temos membros em que faça sentido utilizar este tipo de restrição. \\
 \textbf{Restrições de chave externa:} Em vez de ser rejeitada a modificação de uma tabela que é referenciada noutra decidimos que: caso houvesse um delete do destino, o "apontador" devia ser NULO e numa atualização todos os valores antigos deviam ser alterados em cascata, ON DELETE SET NULL \&\& ON UPDATE CASCADE . \\
-\textbf{Triggers:} COMPLETAR ESTA PARTE, POR FAZER 3 fase. Usar um gatilho para...
-\\\newline
+\textbf{Triggers:} O ficheiro com os triggers chama-se triggers.sql. E lá podemos encontrar três pares de gatilhos que impossibilitam a inserção ou atualização de informação inválida.
+\begin{itemize}
+  \item Um arbitro só pode arbitrar uma partida se tiver competências para tal (Update e Insert)
+  \item Um jogador so pode estar numa equipa num torneio (Update e Insert)
+  \item
+\end{itemize}
+
 E obviamente que foram definidas chaves que são um tipo de restrição. \\
 %Dizer o que irá ser inserido na bases de dados
 \section{Linguagem de Manipulação de dados - Inserção}
@@ -96,31 +101,30 @@ O ficheiro com as consultas chama-se queries.sql, e lá encontram-se as seguinte
 \\\newline
 Principais
 \begin{itemize}
-\item Encontrar o nome, o email e a nacionalidade de todos os jogadores que participaram num dado torneio num dado escalão
-\item Encontrar o jogador com mais pontos
-\item Encontrar a pontuação de todos os jogadores de uma equipa para todas as partidas que eles realizaram
-\item Encontrar o jogador com mais pontos de uma Equipa
-\item Encontrar a variância da pontuação dos jogadores de uma equipa
-\item Encontrar a equipa com mais pontos para um tipo de jogo e escalão
-\item Encontrar a equipa com mais pontos
-\item Encontrar a equipa com mais pontos para um dado torneio num dado escalão
+  \item Encontrar o nome, o email e a nacionalidade de todos os jogadores que participaram num dado torneio num dado escalão
+  \item Encontrar o jogador com mais pontos
+  \item Encontrar a pontuação de todos os jogadores de uma equipa para todas as partidas que eles realizaram
+  \item Encontrar o jogador com mais pontos de uma Equipa
+  \item Encontrar a variância da pontuação dos jogadores de uma equipa
+  \item Encontrar a equipa com mais pontos para um tipo de jogo e escalão
+  \item Encontrar a equipa com mais pontos
+  \item Encontrar a equipa com mais pontos para um dado torneio num dado escalão
 \end{itemize}
 
 \newpage
-
 Outros
 \begin{itemize}
-\item Ver a duração média dos jogos para um dado tipo jogo
-\item Ver qual é o país mais comum
-\item Encontrar o nome, o email e a nacionalidade de todos os jogadores que jogam num tipo de jogo num dado escalão.
-\item Encontrar o nome, o email e a nacionalidade de todos os jogadores que participaram num dado torneio com um dado nome( podem haver vários).
-\item Encontrar todos os jogadores pertencentes às equipas, e mostrar o idEquipa; nome, email e nacionalidade do jogador.
-\item Encontrar todos os jogadores de um dada equipa
-\item Contar o número de equipas em que os jogadores estão inscritos
-\item Pontuação total por jogador
+  \item Ver a duração média dos jogos para um dado tipo jogo
+  \item Ver qual é o país mais comum
+  \item Encontrar o nome, o email e a nacionalidade de todos os jogadores que jogam num tipo de jogo num dado escalão.
+  \item Encontrar o nome, o email e a nacionalidade de todos os jogadores que participaram num dado torneio com um dado nome( podem haver vários).
+  \item Encontrar todos os jogadores pertencentes às equipas, e mostrar o idEquipa; nome, email e nacionalidade do jogador.
+  \item Encontrar todos os jogadores de um dada equipa
+  \item Contar o número de equipas em que os jogadores estão inscritos
+  \item Pontuação total por jogador
 \end{itemize}
 
 %Incluir todas as restrições, digitalizar o diagrama ou fazer num programa qualquer. Incluir notas.
 \section{Diagrama de classes UML melhorado}
-\includegraphics[scale=0.80]{./classModel.pdf}
+\includegraphics[scale=0.70]{classModel.pdf}
 \end{document}

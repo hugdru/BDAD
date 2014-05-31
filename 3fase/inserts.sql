@@ -103,9 +103,9 @@ INSERT INTO JogadorEquipa VALUES (9, 6);
 INSERT INTO JogadorEquipa VALUES (8, 5);
 INSERT INTO JogadorEquipa VALUES (7, 5);
 INSERT INTO JogadorEquipa VALUES (5, 5);
-INSERT INTO JogadorEquipa VALUES (8, 4);
-INSERT INTO JogadorEquipa VALUES (7, 4);
-INSERT INTO JogadorEquipa VALUES (5, 4);
+INSERT INTO JogadorEquipa VALUES (4, 4);
+INSERT INTO JogadorEquipa VALUES (3, 4);
+INSERT INTO JogadorEquipa VALUES (2, 4);
 INSERT INTO JogadorEquipa VALUES (4, 3);
 INSERT INTO JogadorEquipa VALUES (5, 3);
 INSERT INTO JogadorEquipa VALUES (3, 2);
@@ -139,12 +139,6 @@ INSERT INTO Partida VALUES (NULL, 1, 1, 1, '11/2/2013', 15);
 INSERT INTO Partida VALUES (NULL, 1, 1, 1, '12/2/2013', 20);
 INSERT INTO Partida VALUES (NULL, 3, 2, 2, '12/2/2013', 45);
 INSERT INTO Partida VALUES (NULL, 2, 5, 2, '12/2/2013', 5);
-
-INSERT INTO ArbitroPartida VALUES (1, 1);
-INSERT INTO ArbitroPartida VALUES (1, 2);
-INSERT INTO ArbitroPartida VALUES (1, 3);
-INSERT INTO ArbitroPartida VALUES (2, 4);
-INSERT INTO ArbitroPartida VALUES (5, 5);
 
 -- Xadrez
 INSERT INTO EquipaPartida VALUES (7,1,1,1998);
@@ -194,3 +188,9 @@ INSERT INTO ArbitroTipoJogo VALUES (4,4);
 INSERT INTO ArbitroTipoJogo VALUES (5,5);
 INSERT INTO ArbitroTipoJogo VALUES (6,6);
 INSERT INTO ArbitroTipoJogo VALUES (7,7);
+
+INSERT INTO ArbitroPartida VALUES (1, 1);
+INSERT INTO ArbitroPartida VALUES (1, 2);
+INSERT INTO ArbitroPartida VALUES (1, 3);
+INSERT INTO ArbitroPartida VALUES (2, 4);
+INSERT INTO ArbitroPartida VALUES (5, 5);
