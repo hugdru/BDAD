@@ -1,9 +1,9 @@
--- PRAGMA foreign_keys = ON;
+PRAGMA foreign_keys = ON;
 
 DROP TRIGGER IF EXISTS ArbitroPodeArbitrarPartidaInsert;
 DROP TRIGGER IF EXISTS ArbitroPodeArbitrarPartidaUpdate;
 DROP TRIGGER IF EXISTS JogadorUmaEquipaUmTorneioInsert;
--- DROP TRIGGER IF EXISTS JogadorUmaEquipaUmTorneioUpdate;
+DROP TRIGGER IF EXISTS JogadorUmaEquipaUmTorneioUpdate;
 
 -- 1º Trigger - Um arbitro só pode arbitrar uma partida se tiver competências para tal (Insert e Update)
 CREATE TRIGGER ArbitroPodeArbitrarPartidaInsert
@@ -35,7 +35,7 @@ BEGIN
     SELECT RAISE(ABORT, 'Este arbitro não pode arbitrar este tipo de Jogo!');
 END;
 
--- 2º Trigger - Um jogador so pode estar numa equipa num torneio (Insert e Update)
+-- 2º Trigger - Um jogador só pode estar numa equipa num torneio (Insert e Update)
 CREATE TRIGGER JogadorUmaEquipaUmTorneioInsert
 BEFORE INSERT ON EquipaPartida
 WHEN EXISTS
