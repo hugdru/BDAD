@@ -22,7 +22,7 @@
 * Adicionar mais inserts de modo a tornar as pesquisas mais interessantes DONE
 
 ## Modelo uml ##
-* Mudar em Extensão -> codigo char(4)
-* Melhorar a apresentação
-* Legendar as associações
-* Meter formato numa tabela à parte, um torneio só pode ter um formato mas um formato pode apontar para varios torneios
+* Mudar em Extensão -> codigo char(4)(DONE)
+* Melhorar a apresentação (DONE)
+* Legendar as associações (DONE)
+* Meter formato numa tabela à parte, um torneio só pode ter um formato mas um formato pode apontar para varios torneios (DONE)
