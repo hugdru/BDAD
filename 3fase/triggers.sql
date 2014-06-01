@@ -80,5 +80,3 @@ WHEN EXISTS
 BEGIN
   SELECT RAISE(ABORT, 'Esta equipa tem um jogador comum noutra, o que não pode acontecer num mesmo torneio!');
 END;
-
--- 3º Trigger -
