@@ -38,17 +38,17 @@
 %Todas as figuras devem ser referidas no texto. %\ref{fig:codigoFigura}
 
 \section{Contexto}
-Esta base de dados destina-se a um Salão de jogos que organiza jogos de Tabuleiro e foi desenvolvida, inicialmente, pensando num só jogo, o xadrez. Posteriormente, então, foi feita uma generalização. Em suma, são guardados os dados dos jogadores e dos torneios de uma dada temporada. Isto, possibilitará aos utilizadores da base de dados: rigor ao planear eventos, versatilidade, facilidade de registo, entre outros. Por exemplo, se eu quisesse organizar um torneio, em condições, iria ter saber à priori: os escalões, o jogo a que diz respeito, a temporada, as equipas inscritas e os patrocinadores. E registá-los em algum sítio para que depois possa associá-los, direta ou indiretamente, a uma partida e uma partida a equipas. A nossa base de dados tem como único propósito tornar esse \{pré,pós\}registo trivial.
+Esta base de dados destina-se a ser usada por um salão de jogos que organize torneios de jogos de tabuleiro e foi inicialmente desenvolvida pensando num só jogo, o xadrez, e posteriormente foi feita uma generalização. Em suma todos os dados referentes aos torneios de uma temporada são guardados , desde os seus participantes , patrocinadores e aos resultados. Isto possibilitará aos utilizadores da base de dados ter maior rigor a planear eventos com uma base de dados versatil e com facilidade de registo. Por exemplo, na organização de um torneio é necessário saber à priori os escalões, o tipo de jogo, a temporada, as equipas inscritas e os patrocinadores e fazer o registo de forma a poder associá-los. A nossa base de dados tem como único propósito tornar esse registo trivial.
 
 %explicar de forma legível o nosso diagrama de classes uml melhorado. Tal como é feito nos primeiros exercícios.
 \section{Conceitos Principais}
-Num torneio de jogos de tabuleiro podem haver várias partidas entre duas ou mais equipas num dado escalão de um torneio. As partidas podem ocorrer em diversos sítios, têm de ser reguladas por um ou mais árbitros qualificados para o jogo em disputa e os resultados devem ser guardados. Cada equipa é formada por um ou mais jogadores. Podem haver vários torneios exatamente iguais, independentemente de quaisquer condicionantes.
+Num torneio de jogos de tabuleiro podem haver várias partidas entre duas ou mais equipas num dado escalão. As partidas podem ocorrer em diversos sítios, sendo reguladas por um ou mais árbitros qualificados para o jogo em disputa e os resultados são guardados. Cada equipa é formada por um ou mais jogadores. Podem haver vários torneios de estrutura igual com valores semelhantes.
 
 %explicar como fizemos o mapeamento para o modelo relacional e qual o nível de normalização.
 \section{Passagem ao modelo relacional e normalização}
-A transição do diagrama de classes para o schema da base de dados foi feita sem grandes problemas. Optámos por separar a generalização em duas tabelas segundo o estilo orientado a objetos. Porque ao fazer isto, ficamos no ponto de equilíbrio entre poupar nas ligações de tabelas e nos recursos de armazenamento. Uma relação, menos ligações embora haja desperdício de armazenamento; Três relações, mais ligações e mesmo uso de recursos de armazenamento. A restrição de especialização é do tipo complete e disjoint, visto que a classe base, Pessoa, só serve de template (classe virtual) e devido à impossibilidade de uma Pessoa ser árbitro e jogador.
+A transição do diagrama de classes para o schema da base de dados foi feita sem grandes problemas. Optámos por separar a generalização em duas tabelas segundo o estilo orientado a objetos. Ao fazer desta forma ficamos no ponto de equilíbrio entre poupar nas ligações de tabelas e nos recursos de armazenamento. Onde numa relação há menos ligações embora haja desperdício de armazenamento e em três relações há mais ligações e o mesmo uso de recursos de armazenamento. A restrição de especialização é do tipo complete e disjoint, visto que a classe base Pessoa só serve de template (classe virtual) e devido à impossibilidade de uma Pessoa ser árbitro e jogador.
 \\\newline
-A única ternária no nosso uml foi decomposta em EquipaPatrocinadorTorneio e a classe de associação em EquipaPartida. Mais as tabelas de "apoio". Na tabela Jogador o idPais->País tem o significado de Nacionalidade e idCidade->Cidade é um "apontador" para uma cidade que por sua vez está associada a um País, e representa a cidade onde ele reside. O telefone e a extensão podem não estar ligados nem ao País nem à morada de uma Pessoa, por isso não servem de determinante para nenhum desses atributos, porque uma Pessoa pode viver num País, ser de outro e ter um contacto registado ainda noutro País.
+A única ternária no uml foi decomposta em EquipaPatrocinadorTorneio , a classe de associação em EquipaPartida e em mais tabelas de "apoio". Na tabela Jogador o idPais->País refere-se á Nacionalidade e idCidade->Cidade é um "apontador" para uma cidade que por sua vez está associada a um País, e representa a cidade onde ele reside. O telefone e a extensão podem não estar ligados nem ao País nem à morada de uma Pessoa, por isso não servem de determinante para nenhum desses atributos, porque uma Pessoa pode viver num País, ser de outro e ter um contacto registado ainda noutro País.
 \\\newline
 As relações muitos para muitos foram decompostas da maneira tradicional, uma tabela para cada relação mais uma de interligação. No caso das um para muitos, criámos uma tabela para cada classe e um campo na de multiplicidade muitos que "aponta" para a tabela de multiplicidade um.
 \clearpage
@@ -74,29 +74,29 @@ As relações muitos para muitos foram decompostas da maneira tradicional, uma t
 \textbf{EquipaPartida}(\underline{idEquipa->Equipa}, \underline{idPartida->Partida}, posicao, resultado) \\
 \textbf{EquipaPatrocinadorTorneio}(\underline{idEquipa->Equipa}, \underline{idPatrocinador->Patrocinador}, \underline{idTorneio->Torneio})
 \\\newline
-A nossa base de dados encontra-se na 3ª Forma Normal, visto que respeita a 1ª, 2ª, 3ª formas normais. Deste modo a nossa base de dados evita algumas anomalias: redundância de dados, atualização de campos, campos sinónimos, etc. Não continuámos a normalizar para além da 3ª Forma Normal porque isto tornaria a nossa base de dados mais lenta devido à quantidade de ligações, mais difícil de pesquisar e por não ser exigido pelos docentes. Todas as nossas relações estão na 1ª Forma Normal porque são respeitadas as regras das tabelas e porque em cada relação está definida uma chave primária. Também está na 2ª visto que nenhum subconjunto das chaves primárias determina um atributo não chave, as nossas relações só têm uma chave ou são todas chaves portanto respeitam de imediato esta Forma Normal. Excepto a classe de associação que é necessário identificar se um subconjunto da chave identifica um atributo não chave, que não se verifica, portanto está na segunda Forma Normal. Para respeitar a 3ª Forma Normal não podem haver dependências funcionais transitivas, A->B \&\& B->C, que não acontece na nossa bases de dados. A única razão para a nossa base de dados não respeitar a BCNF restringe-se às relações Árbitro e Jogador, porque existe um determinante em cada uma das relações que não é chave candidata, a dependência funcional idCidade->Cidade,rua ---> codigoPostal. Isto é, se partirmos do ponto de vista que é possível determinar o código postal sabendo a Rua, a Cidade e o País em causa (o país está relacionado com Cidade). Cada Cidade tem um nome, um "apontador" para um País e um código único que serve de chave primária.
+Esta base de dados encontra-se na 3ª Forma Normal, visto que respeita a 1ª, 2ª e 3ª formas normais. Deste modo evita-se algumas anomalias como : redundância de dados,atualização de campos, campos sinónimos, etc. Não continuámos a normalizar para além da 3ª Forma Normal pois tornaria a base de dados mais lenta devido à quantidade de ligações o que por sua vez torna mais difícil fazer pesquisas e também por não ser exigido pelos docentes. Todas as nossas relações estão na 1ª Forma Normal porque são respeitadas as regras das tabelas e em cada relação está definida uma chave primária. Também está na 2ª Forma Normal visto que nenhum subconjunto das chaves primárias determina um atributo não chave, as nossas relações só têm uma chave ou são todas chaves portanto respeitam de imediato esta Forma Normal, exceptuando a classe de associação que é necessário identificar se um subconjunto da chave identifica um atributo não chave, o que não se verifica, respeitando também a 2ª Forma normal. Para respeitar a 3ª Forma Normal não podem haver dependências funcionais transitivas, A->B \&\& B->C, que não acontece na nossa bases de dados. A única razão para a nossa base de dados não respeitar a BCNF restringe-se às relações Árbitro e Jogador, porque existe um determinante em cada uma das relações que não é chave candidata, a dependência funcional idCidade->Cidade,rua ---> codigoPostal. Isto é, se partirmos do ponto de vista que é possível determinar o código postal sabendo a Rua, a Cidade e o País em causa (o país está relacionado com Cidade). Cada Cidade tem um nome, um "apontador" para um País e um código único que serve de chave primária.
 
 %indicar o tipo de restrições que foram usadas e a criação das tabelas
 \section{Linguagem de Definição de dados e Restrições}
-O ficheiro de criação da base de dados chama-se boardDb.sql, e para além do óbvio, pode-se encontrar as seguintes restrições:
+O ficheiro de criação da base de dados chama-se boardDb.sql onde se pode encontrar as seguintes restrições:
 \\\newline
 \textbf{Restrições de valor:} NOT NULL e de limites de atributos. \\
 \textbf{Restrições entre atributos:} não foi utilizado porque não temos membros em que faça sentido utilizar este tipo de restrição. \\
-\textbf{Restrições de chave externa:} Em vez de ser rejeitada a modificação de uma tabela que é referenciada noutra decidimos que: caso houvesse um delete do destino, o "apontador" devia ser NULO e numa atualização todos os valores antigos deviam ser alterados em cascata, ON DELETE SET NULL \&\& ON UPDATE CASCADE . \\
-\textbf{Triggers:} O ficheiro com os triggers chama-se triggers.sql. E lá podemos encontrar dois pares de gatilhos que impossibilitam a inserção ou atualização de informação inválida.
+\textbf{Restrições de chave externa:} Em vez de ser rejeitada a modificação de uma tabela que é referenciada noutra decidimos que caso houvesse um delete do destino, o "apontador" devia ser NULO e numa atualização todos os valores antigos deviam ser alterados em cascata, ON DELETE SET NULL \&\& ON UPDATE CASCADE . \\
+\textbf{Triggers:} O ficheiro com os triggers chama-se triggers.sql. Lá podemos encontrar dois pares de gatilhos que impossibilitam a inserção ou atualização de informação inválida.
 \begin{itemize}
   \item Um arbitro só pode arbitrar uma partida se tiver competências para tal (Update e Insert)
   \item Um jogador só pode estar numa equipa num torneio (Update e Insert)
 \end{itemize}
 
-E obviamente que foram definidas chaves que são um tipo de restrição. \\
+Foram definidas chaves que são um tipo de restrição. \\
 %Dizer o que irá ser inserido na bases de dados
 \section{Linguagem de Manipulação de dados - Inserção}
-Todas as tabelas foram preenchidas com informação decente e de tamanho apreciável de modo a tornar as pesquisas mais interessantes. Temos uma média de inserts perto das 9 linhas/tabela. O ficheiro com os inserts chama-se inserts.sql.
+Todas as tabelas foram preenchidas com alguma informação de tamanho apreciável de modo a tornar as pesquisas mais interessantes. Temos uma média de inserts perto das 9 linhas/tabela. O ficheiro com os inserts chama-se inserts.sql.
 
 %Dizer que tipo de consultas fazemos na nossa base de dados
 \section{Linguagem de Manipulação de dados - Consulta}
-O ficheiro com as consultas chama-se queries.sql, e lá encontram-se as seguintes perguntas à base de dados:
+O ficheiro com as consultas chama-se queries.sql, e lá encontram-se as seguintes consultas à base de dados:
 \\\newline
 Principais
 \begin{itemize}
@@ -116,7 +116,7 @@ Outros
   \item Ver qual é o país mais comum
   \item Encontrar o nome, o email e a nacionalidade de todos os jogadores que jogam num tipo de jogo num dado escalão.
   \item Encontrar o nome, o email e a nacionalidade de todos os jogadores que participaram num dado torneio com um dado nome( podem haver vários).
-  \item Encontrar todos os jogadores pertencentes às equipas, e mostrar o idEquipa; nome, email e nacionalidade do jogador.
+  \item Encontrar todos os jogadores pertencentes às equipas e mostrar o idEquipa, nome, email e nacionalidade do jogador.
   \item Encontrar todos os jogadores de um dada equipa
   \item Contar o número de equipas em que os jogadores estão inscritos
   \item Pontuação total por jogador
